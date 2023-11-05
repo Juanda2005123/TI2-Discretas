@@ -31,7 +31,8 @@ Este grafo es recorrido con ayuda de los algoritmos de Dijkstra y Floyd-Warshall
 Cada arista tiene asignado un peso que es generado al inicio del juego de manera aleatoria. 
 A través de hilos y con estos algoritmos, el primer caballo que llegue al último vértice es el ganador.
 
-![Imagen del grafo](CarreraCaballos.PNG)
+![Imagen del grafo](imagenReadMe/CarreraCaballos.PNG)
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
