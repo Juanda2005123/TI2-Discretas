@@ -31,9 +31,16 @@ Este grafo es recorrido con ayuda de los algoritmos de Dijkstra y Floyd-Warshall
 Cada arista tiene asignado un peso que es generado al inicio del juego de manera aleatoria. 
 A través de hilos y con estos algoritmos, el primer caballo que llegue al último vértice es el ganador.
 
+Imagen del grafo:
+
 ![Imagen del grafo](imagenReadMe/CarreraCaballos.PNG)
 
-
+En la imagen se observa el vértice inicial, desde el cual un caballo inicia la carrera.
+Desde el vértice inicial puede elegir tres vértices a los cuales ir.
+Desde el siguiente vértice puede elegir otros tres vértices para ir.
+Esto se repite hasta llegar al vértice final.
+Cada arista que observa va a tener un peso generado aleatoriamente.
+De tal manera, con los algoritmos, se busca el camino de menor peso.
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
@@ -47,19 +54,11 @@ deslizar a lo largo de rutas para obtener la máxima puntuación.
 
 #### Instrucciones del juego
 
-1. **Selección de Beatmap:** Comienza seleccionando un beatmap, que es el patrón de juego que corresponde a una canción específica. Puedes encontrar una amplia variedad de beatmaps creados por la comunidad en el juego.
-
-2. **Sincronización con la Música:** Una vez que comienza el beatmap, debes sincronizar tus acciones con la música. Presta atención a los círculos, sliders y otros patrones que aparecen en la pantalla. Golpea, desliza o mantén pulsado en el momento preciso en que la música te indique.
-
-3. **Precisión y Puntuación:** Tu precisión y tiempo determinarán tu puntuación. Cuanto más cerca estés del ritmo y más precisas sean tus acciones, mayor será tu puntuación. Además, puedes ganar "combos" al encadenar aciertos consecutivos.
-
-4. **Dificultad Variable:** osu! ofrece beatmaps de diferentes niveles de dificultad, desde principiantes hasta expertos. Elige el que más te desafíe y diviértete superándote a ti mismo.
+Por terminar por cano.
 
 #### Algoritmo del juego
 
-osu! utiliza algoritmos de grafos para generar patrones de juego en sincronización con la música. Cada beatmap es una secuencia de nodos y conexiones que representan los momentos en que debes interactuar con la pantalla. Los grafos se utilizan para calcular el tiempo de aparición de los círculos y la dirección de los sliders, lo que asegura que el juego se adapte perfectamente a la música y ofrezca una experiencia de juego emocionante.
-
-¡Prepárate para poner a prueba tu ritmo y precisión en osu! y disfruta de una experiencia de juego musical única!
+Por terminar por cano.
 ## Enlace al enunciado
 
 [Enlace al enunciado del problema](https://docs.google.com/document/d/10hhjAGeJ64UNWm14GvJy1Y3xHKX2kzeJjCLxbtblADg/edit)
