@@ -15,7 +15,7 @@ public class Horse {
     }
 
     public String getPercentage(){
-        return format.format(winningPercentage);
+        return format.format(winningPercentage)+"%";
     }
 
     public String getName() {

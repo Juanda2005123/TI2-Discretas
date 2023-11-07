@@ -11,7 +11,7 @@
    <left>
       <VBox prefHeight="972.0" prefWidth="400.0" styleClass="light-black-background" stylesheets="@../cssStyle/horseMainGame.css" BorderPane.alignment="TOP_CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="49.0" prefWidth="200.0" styleClass="darker-light-black-background" stylesheets="@../cssStyle/horseMainGame.css">
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="200.0" styleClass="darker-light-black-background" stylesheets="@../cssStyle/horseMainGame.css">
                <children>
                   <Label prefWidth="80.0" styleClass="grey-white-bold-text" stylesheets="@../cssStyle/horseMainGame.css" text="Horses">
                      <HBox.margin>
@@ -45,7 +45,7 @@
                <VBox.margin>
                   <Insets top="1.0" />
                </VBox.margin></VBox>
-            <VBox fx:id="apostarCaballo" prefHeight="672.0" prefWidth="400.0" stylesheets="@../cssStyle/horseMainGame.css" />
+            <VBox fx:id="apostarCaballo" prefHeight="675.0" prefWidth="400.0" styleClass="darker-light-black-background" stylesheets="@../cssStyle/horseMainGame.css" />
          </children>
       </VBox>
    </left>

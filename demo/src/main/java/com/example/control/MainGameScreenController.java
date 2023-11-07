@@ -84,6 +84,15 @@ public class MainGameScreenController implements Initializable {
                     vBoxtablaResultados.getChildren().clear();
                     vBoxtablaResultados.setStyle("-fx-background-color: #141414");
                 }
+
+                FXMLLoader loader1 = new FXMLLoader();
+                loader1.setLocation(getClass().getResource("/com/example/vista/part-apostar-caballo.fxml"));
+
+                HBox h = loader1.load();
+
+                apostarCaballo.getChildren().add(h);
+
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

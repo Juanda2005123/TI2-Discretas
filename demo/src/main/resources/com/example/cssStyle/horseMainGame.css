@@ -17,3 +17,7 @@
     -fx-text-fill: #e1e1e1;
     -fx-font-weight: bold;
 }
+.horses-apostar{
+    -fx-background-color: #212121;
+    -fx-background-radius: 10;
+}
