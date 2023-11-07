@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="972.0" prefWidth="1728.0" style="-fx-background-color: Grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.control.JuegoGameScreenController">
+    <left>
+        <VBox prefHeight="972.0" prefWidth="400.0" style="-fx-background-color: White;" BorderPane.alignment="CENTER">
+            <children>
+                <VBox fx:id="resultadosAnteriores" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: grey;" />
+                <VBox fx:id="apostarCaballo" prefHeight="672.0" prefWidth="400.0" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <VBox prefHeight="972.0" prefWidth="1328.0" style="-fx-background-color: blue;" BorderPane.alignment="CENTER">
+            <children>
+                <VBox fx:id="juego" prefHeight="672.0" prefWidth="1328.0" />
+                <VBox fx:id="resultadosPartida" prefHeight="300.0" prefWidth="1328.0" style="-fx-background-color: grey;" />
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

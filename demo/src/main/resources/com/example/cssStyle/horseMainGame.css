@@ -1,0 +1,19 @@
+.black-background{
+    -fx-background-color: #000000;
+}
+
+.darker-light-black-background{
+    -fx-background-color: #141414;
+}
+
+.light-black-background{
+    -fx-background-color: #505050;
+}
+
+.grey-white-text{
+    -fx-text-fill: #e1e1e1;
+}
+.grey-white-bold-text{
+    -fx-text-fill: #e1e1e1;
+    -fx-font-weight: bold;
+}
