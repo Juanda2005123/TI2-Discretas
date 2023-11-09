@@ -1,17 +1,32 @@
 package com.example.model;
 
+import javafx.scene.image.Image;
+
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Horse {
     private String name;
     private int wins;
     private double winningPercentage;
     private final DecimalFormat format;
-    public Horse(String name){
+    private final String PATH;
+
+    //elementos graficos
+    private List<Image> runs;
+    public Horse(String name, String color){
         this.name = name;
+        PATH = "/com/example/img/"+color+"/";
+        runs = new ArrayList<>();
         wins = 0;
         winningPercentage = 0;
         format = new DecimalFormat("0.0");
+
+        for (int i = 0; i < 6 ; i++){
+            Image image = new Image(getClass().getResourceAsStream(PATH+i+".png"));
+            runs.add(image);
+        }
     }
 
     public String getPercentage(){
@@ -40,5 +55,9 @@ public class Horse {
 
     public void setWinningPercentage(int totalRaces) {
         this.winningPercentage = (double) (wins/totalRaces)*100;
+    }
+
+    public Image getImage(int i){
+        return runs.get(i);
     }
 }

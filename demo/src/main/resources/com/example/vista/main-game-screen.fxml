@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -52,7 +53,8 @@
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="972.0" prefWidth="1328.0" style="-fx-background-color: #e1e1e1;" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="juego" prefHeight="672.0" prefWidth="1328.0" styleClass="black-background" stylesheets="@../cssStyle/horseMainGame.css" />
+            <Canvas fx:id="canvas" height="672.0" width="1328.0"
+            focusTraversable="true"/>
             <VBox fx:id="resultadosPartida" prefHeight="300.0" prefWidth="1328.0" styleClass="darker-light-black-background" stylesheets="@../cssStyle/horseMainGame.css">
                <children>
                   <HBox alignment="CENTER" prefHeight="75.0" prefWidth="1328.0">

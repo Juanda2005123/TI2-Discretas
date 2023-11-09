@@ -32,11 +32,11 @@ public class Controller {
     }
 
     private void startHorses(){
-        horseList.add(new Horse("Spirit"));
-        horseList.add(new Horse("Morgan"));
-        horseList.add(new Horse("Pegasus"));
-        horseList.add(new Horse("Red Rum"));
-        horseList.add(new Horse("Bullseye"));
+        horseList.add(new Horse("Spirit","Red1"));
+        horseList.add(new Horse("Morgan","Orange5"));
+        horseList.add(new Horse("Pegasus","Grey3"));
+        horseList.add(new Horse("Red Rum","Black2"));
+        horseList.add(new Horse("Bullseye","Brown4"));
     }
 
     public Horse getHorse(int i){

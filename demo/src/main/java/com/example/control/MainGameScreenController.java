@@ -4,6 +4,7 @@ import com.example.model.Horse;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -14,6 +15,8 @@ import java.util.ResourceBundle;
 
 public class MainGameScreenController implements Initializable {
 
+    @FXML
+    public Canvas canvas;
     @FXML
     private VBox apostarCaballo;
 
@@ -89,6 +92,9 @@ public class MainGameScreenController implements Initializable {
                 loader1.setLocation(getClass().getResource("/com/example/vista/part-apostar-caballo.fxml"));
 
                 HBox h = loader1.load();
+
+                PartApostarCaballoController tic1 = loader1.getController();
+                tic1.initAttributes(horse.getImage(5), horse.getName());
 
                 apostarCaballo.getChildren().add(h);
 
