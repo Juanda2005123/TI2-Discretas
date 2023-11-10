@@ -1,6 +1,7 @@
 package com.example.control;
 
 import com.example.model.Horse;
+import com.example.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Controller {
     private int totalRaces;
 
     private boolean firstRace;
+    private Player player;
 
     public static Controller getInstance(){
         if(controller==null) {
@@ -19,13 +21,23 @@ public class Controller {
         }
         return controller;
     }
+    public List<Horse> getHorseList(){
+        return horseList;
+    }
 
     public Controller(){
+
         horseList = new ArrayList<>();
         totalRaces = 0;
         startHorses();
         firstRace = true;
     }
+
+    public void setPlayer(String name){
+        player = new Player(name);
+    }
+
+
 
     public boolean isFirstRace(){
         return firstRace;

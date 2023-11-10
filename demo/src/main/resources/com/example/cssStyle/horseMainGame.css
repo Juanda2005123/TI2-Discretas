@@ -17,6 +17,10 @@
     -fx-text-fill: #e1e1e1;
     -fx-font-weight: bold;
 }
+.red-bold-text{
+    -fx-text-fill: #ff0000;
+    -fx-font-weight: bold;
+}
 .horses-apostar{
     -fx-background-color: #212121;
     -fx-background-radius: 10;

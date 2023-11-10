@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="400.0" spacing="80.0" styleClass="horses-apostar" stylesheets="@../cssStyle/horseMainGame.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.control.PartCantidadApostarController">
+   <children>
+      <Label fx:id="horseName" styleClass="grey-white-bold-text" stylesheets="@../cssStyle/horseMainGame.css" text="Red Redemption">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="image" fitHeight="151.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Brown4/5.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="inputApuesta" alignment="CENTER" prefWidth="250.0" promptText="\$$$$$$" styleClass="darker-light-black-background" stylesheets="@../cssStyle/horseMainGame.css">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="120.0">
+         <children>
+            <Button fx:id="cancelarButton" mnemonicParsing="false" onAction="#cancelarApuesta" prefWidth="100.0" stylesheets="@../cssStyle/horseMainGame.css" text="Cancelar">
+               <styleClass>
+                  <String fx:value="red-bold-text" />
+                  <String fx:value="darker-light-black-background" />
+               </styleClass>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="apostarButton" mnemonicParsing="false" onAction="#hacerApuesta" prefWidth="100.0" stylesheets="@../cssStyle/horseMainGame.css" text="Apostar">
+               <styleClass>
+                  <String fx:value="grey-white-bold-text" />
+                  <String fx:value="darker-light-black-background" />
+               </styleClass>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

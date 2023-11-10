@@ -1,5 +1,7 @@
 package com.example.model;
 
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.text.DecimalFormat;
@@ -15,11 +17,26 @@ public class Horse {
 
     //elementos graficos
     private List<Image> runs;
+    private Canvas canvas;
+    private GraphicsContext graphicsContext;
+
+    //elementos espaciales
+    private Position position;
+    private State state;
+    private int frameImg;
+
+
+
     public Horse(String name, String color){
         this.name = name;
         PATH = "/com/example/img/"+color+"/";
         runs = new ArrayList<>();
         wins = 0;
+
+        frameImg = 0;
+        state = State.IDLE;
+        position = new Position(0,0);
+
         winningPercentage = 0;
         format = new DecimalFormat("0.0");
 

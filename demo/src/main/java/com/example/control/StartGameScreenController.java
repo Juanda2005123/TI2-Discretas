@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,8 +24,28 @@ public class StartGameScreenController {
     @FXML
     void jugar(ActionEvent event) {
         try {
+
+            FXMLLoader loaders = new FXMLLoader(getClass().getResource("/com/example/vista/ask-player-name.fxml"));
+
+            Parent root = loaders.load();
+            AskPlayerNameController controllerAdd = loaders.getController();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+
+            String playerName = controllerAdd.getPlayerName();
+
+            Controller controller = Controller.getInstance();
+            controller.setPlayer(playerName);
+
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vista/main-game-screen.fxml"));
-            Parent root = loader.load();
+            root = loader.load();
+
+
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene mainScene = new Scene(root);
