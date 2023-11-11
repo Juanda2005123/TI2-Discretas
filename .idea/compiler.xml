@@ -9,5 +9,8 @@
         <module name="TI2-Discretas" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="GraphID2" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
