@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="400.0" spacing="40.0" styleClass="horses-apostar" stylesheets="@../cssStyle/horseMainGame.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.control.PartApuestaRealizadaController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="400.0" spacing="40.0" styleClass="horses-apostar" stylesheets="@../../cssStyle/horseMainGame.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.control.part.PartApuestaRealizadaController">
     <children>
-        <Label fx:id="horseName" styleClass="grey-white-bold-text" stylesheets="@../cssStyle/horseMainGame.css" text="Red Redemption">
+        <Label fx:id="horseName" styleClass="grey-white-bold-text" stylesheets="@../../cssStyle/horseMainGame.css" text="Red Redemption">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
         <ImageView fx:id="image" fitHeight="151.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../img/Brown4/5.png" />
+                <Image url="@../../img/Brown4/5.png" />
             </image>
          <VBox.margin>
             <Insets top="40.0" />

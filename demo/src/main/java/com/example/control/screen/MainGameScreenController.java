@@ -1,19 +1,25 @@
-package com.example.control;
+package com.example.control.screen;
 
+import com.example.control.*;
+import com.example.control.part.PartApostarCaballoController;
+import com.example.control.part.PartApuestaRealizadaController;
+import com.example.control.part.PartCantidadApostarController;
+import com.example.control.part.PartResultadosAnterioresController;
 import com.example.model.Horse;
 import com.example.screens.ScreenA;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -75,6 +81,7 @@ public class MainGameScreenController implements Initializable {
     private ScreenA screenA;
 
     private Controller controller;
+    private PartCantidadApostarController partCantidadApostarController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,6 +98,7 @@ public class MainGameScreenController implements Initializable {
             vBoxtablaResultados.getChildren().clear();
             vBoxtablaResultados.setStyle("-fx-background-color: #141414");
         }
+        partCantidadApostarController = null;
 
     }
     private void fillTablaResultadosCaballos(){
@@ -98,7 +106,7 @@ public class MainGameScreenController implements Initializable {
             try{
                 Horse horse = controller.getHorse(i);
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/com/example/vista/part-resultados-anteriores.fxml"));
+                loader.setLocation(getClass().getResource("/com/example/vista/part/part-resultados-anteriores.fxml"));
 
                 HBox hBox = loader.load();
                 PartResultadosAnterioresController tic = loader.getController();
@@ -116,7 +124,7 @@ public class MainGameScreenController implements Initializable {
             try{
                 Horse horse = controller.getHorse(i);
                 FXMLLoader loader1 = new FXMLLoader();
-                loader1.setLocation(getClass().getResource("/com/example/vista/part-apostar-caballo.fxml"));
+                loader1.setLocation(getClass().getResource("/com/example/vista/part/part-apostar-caballo.fxml"));
 
                 HBox h = loader1.load();
 
@@ -130,6 +138,7 @@ public class MainGameScreenController implements Initializable {
         }
     }
 
+
     public void handleApostar(String horseName){
         for (int i = 0; i < 5 ; i++){
             Horse horse = controller.getHorse(i);
@@ -137,12 +146,12 @@ public class MainGameScreenController implements Initializable {
                 apostarCaballo.getChildren().clear();
                 try{
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/com/example/vista/part-cantidad-apostar.fxml"));
+                    loader.setLocation(getClass().getResource("/com/example/vista/part/part-cantidad-apostar.fxml"));
 
                     VBox h = loader.load();
 
-                    PartCantidadApostarController tic = loader.getController();
-                    tic.initAttributes(horse.getImage(5), horse.getName(),this);
+                    partCantidadApostarController = loader.getController();
+                    partCantidadApostarController.initAttributes(horse.getImage(5), horse.getName(),this);
 
                     apostarCaballo.getChildren().add(h);
                 } catch (IOException e){
@@ -153,18 +162,19 @@ public class MainGameScreenController implements Initializable {
             }
         }
     }
+
     public void handleCancelarApuestaPropia(){
+        partCantidadApostarController = null;
         fillApostarCaballo();
     }
-    public void handleApuestaPropia(String horseName, String apuesta){
-        int cantidadApostada = Integer.parseInt(apuesta);
+    public void handleApuestaPropia(String horseName, int cantidadApostada) {
         for(int i = 0; i < 5; i++){
             Horse horse = controller.getHorse(i);
             if(horseName.equals(horse.getName())){
                 apostarCaballo.getChildren().clear();
                 try{
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/com/example/vista/part-apuesta-realizada.fxml"));
+                    loader.setLocation(getClass().getResource("/com/example/vista/part/part-apuesta-realizada.fxml"));
 
                     VBox h = loader.load();
 
@@ -172,7 +182,7 @@ public class MainGameScreenController implements Initializable {
                     tic.initAttributes(horse.getName(),horse.getImage(5),cantidadApostada);
 
                     apostarCaballo.getChildren().add(h);
-
+                    controller.playerBettingMoney(cantidadApostada);
                     startRace();
                 } catch (IOException e){
                     throw new RuntimeException(e.getMessage());
@@ -180,6 +190,51 @@ public class MainGameScreenController implements Initializable {
             }
         }
     }
+    @FXML
+    void recargarDinero(ActionEvent event) {
+        try{
+            if(controller.isRacing()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText(null);
+                alert.setTitle("Invalid recharge");
+                alert.setContentText("Recharges are not possible while horses are running");
+                alert.showAndWait();
+            }else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vista/screen/recargar-dinero-screen.fxml"));
+
+                Parent root = loader.load();
+                RecargarDineroScreenController tic = loader.getController();
+
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(scene);
+                stage.showAndWait();
+
+                int money = tic.getMoney();
+                if(money==0){
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Invalid input");
+                    alert.setContentText("There was an error in the recharge of money");
+                    alert.showAndWait();
+                } else {
+                    controller.rechargePlayerMoney(money);
+                    handleApostar(partCantidadApostarController.getHorseName());
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Successful recharge");
+                    alert.setContentText("$"+money+" were recharged");
+                    alert.showAndWait();
+                }
+            }
+
+
+        } catch (IOException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     private void startRace(){
 
     }

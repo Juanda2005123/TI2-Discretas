@@ -13,6 +13,7 @@ public class Controller {
     private int totalRaces;
 
     private boolean firstRace;
+    private boolean racing;
     private Player player;
 
     public static Controller getInstance(){
@@ -21,12 +22,10 @@ public class Controller {
         }
         return controller;
     }
-    public List<Horse> getHorseList(){
-        return horseList;
-    }
 
-    public Controller(){
 
+    private Controller(){
+        racing = false;
         horseList = new ArrayList<>();
         totalRaces = 0;
         startHorses();
@@ -36,8 +35,31 @@ public class Controller {
     public void setPlayer(String name){
         player = new Player(name);
     }
+    public void rechargePlayerMoney(int money){
+        player.setMoney(player.getMoney()+money);
+    }
+    public void playerBettingMoney(int betMoney){
+        player.setMoney(player.getMoney()-betMoney);
+    }
+    public Player getPlayer(){
+        return player;
+    }
 
+    public List<Horse> getHorseList(){
+        return horseList;
+    }
 
+    public void setFirstRace(boolean firstRace) {
+        this.firstRace = firstRace;
+    }
+
+    public boolean isRacing() {
+        return racing;
+    }
+
+    public void setRacing(boolean racing) {
+        this.racing = racing;
+    }
 
     public boolean isFirstRace(){
         return firstRace;
@@ -45,7 +67,7 @@ public class Controller {
 
     private void startHorses(){
         horseList.add(new Horse("Spirit","Red1"));
-        horseList.add(new Horse("Morgan","Orange5"));
+        horseList.add(new Horse("Duncan","Orange5"));
         horseList.add(new Horse("Pegasus","Grey3"));
         horseList.add(new Horse("Red Rum","Black2"));
         horseList.add(new Horse("Bullseye","Brown4"));

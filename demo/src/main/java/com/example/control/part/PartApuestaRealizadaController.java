@@ -1,5 +1,6 @@
-package com.example.control;
+package com.example.control.part;
 
+import com.example.control.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -23,12 +24,13 @@ public class PartApuestaRealizadaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        Controller controller = Controller.getInstance();
+        controller.setRacing(true);
     }
 
     public void initAttributes(String horseName, Image image, int apuesta){
         this.horseName.setText(horseName);
         this.image.setImage(image);
-        outputApuesta.setText(apuesta+"");
+        outputApuesta.setText("$"+apuesta);
     }
 }

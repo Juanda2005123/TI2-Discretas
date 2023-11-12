@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.text.DecimalFormat;
+
 public class Player {
     private int money;
     private String name;
@@ -8,6 +10,11 @@ public class Player {
 
     public int getMoney() {
         return money;
+    }
+    public String getMoneySeparated(){
+        DecimalFormat format = new DecimalFormat("#,###");
+
+        return "$"+format.format(money);
     }
 
     public void setMoney(int money) {

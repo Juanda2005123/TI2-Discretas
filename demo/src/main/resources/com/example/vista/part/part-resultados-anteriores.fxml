@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="400.0" styleClass="darker-light-black-background" stylesheets="@../../cssStyle/horseMainGame.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.control.part.PartResultadosAnterioresController">
+   <children>
+      <Label fx:id="nombre" maxWidth="120.0" prefHeight="25.0" prefWidth="120.0" styleClass="grey-white-text" stylesheets="@../../cssStyle/horseMainGame.css" text="Spirit">
+         <HBox.margin>
+            <Insets left="50.0" />
+         </HBox.margin>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+         <children>
+            <Label fx:id="victorias" alignment="CENTER" maxWidth="46.0" prefHeight="25.0" prefWidth="46.0" styleClass="grey-white-text" stylesheets="@../../cssStyle/horseMainGame.css" text="76">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="porcentajeVictoria" alignment="CENTER" maxWidth="116.0" prefHeight="25.0" prefWidth="116.0" styleClass="grey-white-text" stylesheets="@../../cssStyle/horseMainGame.css" text="67%">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+         </children>
+         <HBox.margin>
+            <Insets left="30.0" />
+         </HBox.margin>
+      </HBox>
+   </children>
+</HBox>
