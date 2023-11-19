@@ -6,6 +6,7 @@ import java.util.Random;
 public class GraphList {
     private int amountV;
     private List<List<Integer>> list;
+    private Integer[][] matrix;
     private Random ran;
 
     public int getAmountV() {
@@ -23,6 +24,38 @@ public class GraphList {
         for (int i = 1; i < amountV+1; i++) {
             list.add(new ArrayList<>(2));
         }
+        matrix = new Integer[amountV][amountV];
+    }
+
+    public void fillMatrix(){
+
+        for (int i = 1; i < list.size(); i++){
+            for (int j = 0; j < list.get(i).size(); j+=2){
+                matrix[i-1][list.get(i).get(j)-1] = list.get(i).get(j+1);
+            }
+        }
+
+        for(int i = 0; i < matrix.length; i++){
+            matrix[i][i] = 0;
+            for (int j = 0; j < matrix.length; j++){
+
+                if(matrix[i][j] == null){
+                     matrix[i][j] = Integer.MAX_VALUE;
+                }
+            }
+        }
+    }
+
+    public void floydWarshall() {
+        for (int k = 0; k < amountV; k++) {
+            for (int i = 0; i < amountV; i++) {
+                for (int j = 0; j < amountV; j++) {
+                    if (matrix[i][k] != Integer.MAX_VALUE && matrix[k][j] != Integer.MAX_VALUE) {
+                        matrix[i][j] = Math.min(matrix[i][j], matrix[i][k] + matrix[k][j]);
+                    }
+                }
+            }
+        }
     }
 
     public void addEdge(int edge1, int edge2, int weight) {
@@ -30,6 +63,22 @@ public class GraphList {
         list.get(edge1).add(1,weight);
         list.get(edge2).add(0, edge1);
         list.get(edge2).add(1, weight);
+    }
+
+    public String printMatrix(){
+        String ans = "";
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix.length; j++){
+                if (matrix[i][j] == Integer.MAX_VALUE){
+                    ans += " | I | ";
+                }else{
+                    ans += " | " + matrix[i][j] + " | ";
+                }
+
+            }
+            ans += "\n";
+        }
+        return ans;
     }
 
     public void printGraph() {
@@ -139,6 +188,7 @@ public class GraphList {
         ArrayList<Tupla> nextToVisit = new ArrayList<>();
         Tupla tupla = new Tupla(start, 0);
         nextToVisit.add(tupla);
+        ArrayList<Integer> possibleRoads = new ArrayList<>();
 
         for (int i = 0; i < nextToVisit.size(); i++) {
 
@@ -146,7 +196,8 @@ public class GraphList {
             int acumDistance = nextToVisit.get(i).getSecond();
 
             if (actual == destination) {
-                return acumDistance;
+                //return acumDistance;
+                possibleRoads.add(acumDistance);
             }
 
             for (int j = 0; j < list.get(actual).size(); j += 2) {
@@ -161,8 +212,19 @@ public class GraphList {
             }
 
         }
+        if(possibleRoads.isEmpty()){
+            return -1;
+        }else{
+            int min = Integer.MAX_VALUE;
+            for(int i = 0; i < possibleRoads.size(); i++){
+                if(possibleRoads.get(i) < min){
+                    min = possibleRoads.get(i);
+                }
+            }
+            return min;
 
-        return -1;
+        }
+
 
     }
 
@@ -272,6 +334,11 @@ public class GraphList {
         graph.getListVertex(1);
 
         System.out.println(graph.dijkstra(1, 12));
+
+        graph.fillMatrix();
+        System.out.println(graph.printMatrix());
+        graph.floydWarshall();
+        System.out.println(graph.matrix[0][11]);
     }
 }
 
