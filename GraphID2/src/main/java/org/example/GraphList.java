@@ -128,6 +128,44 @@ public class GraphList {
         return ans;
     }
 
+    public int dijkstra(int start, int destination) {
+
+        int[] distances = new int[amountV + 1];
+        for (int i = 1; i <= amountV; i++) {
+            distances[i] = Integer.MAX_VALUE;
+        }
+        distances[start] = 0;
+
+        ArrayList<Tupla> nextToVisit = new ArrayList<>();
+        Tupla tupla = new Tupla(start, 0);
+        nextToVisit.add(tupla);
+
+        for (int i = 0; i < nextToVisit.size(); i++) {
+
+            int actual = nextToVisit.get(i).getFirst();
+            int acumDistance = nextToVisit.get(i).getSecond();
+
+            if (actual == destination) {
+                return acumDistance;
+            }
+
+            for (int j = 0; j < list.get(actual).size(); j += 2) {
+                int neighbor = list.get(actual).get(j);
+                int weight = list.get(actual).get(j + 1);
+                int newDistance = acumDistance + weight;
+
+                if (newDistance < distances[neighbor]) {
+                    distances[neighbor] = newDistance;
+                    nextToVisit.add(new Tupla(neighbor, newDistance));
+                }
+            }
+
+        }
+
+        return -1;
+
+    }
+
     public static void main(String[] args) {
         int amountV = 51; // Número de vértices
         GraphList graph = new GraphList(amountV);
@@ -232,6 +270,8 @@ public class GraphList {
         graph.addEdge(50, 40, graph.ran.nextInt(1,6));
         graph.printGraph();
         graph.getListVertex(1);
+
+        System.out.println(graph.dijkstra(1, 12));
     }
 }
 
