@@ -7,6 +7,7 @@ import com.example.control.part.PartCantidadApostarController;
 import com.example.control.part.PartResultadosAnterioresController;
 import com.example.model.Horse;
 import com.example.screens.ScreenA;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,8 +89,7 @@ public class MainGameScreenController implements Initializable {
         controller = Controller.getInstance();
 
         this.graphicsContext = this.canvas.getGraphicsContext2D();
-        screenA = new ScreenA(canvas,controller.getHorseList());
-        screenA.paintBlack();
+
 
         fillTablaResultadosCaballos();
         fillApostarCaballo();
@@ -236,6 +236,24 @@ public class MainGameScreenController implements Initializable {
     }
 
     private void startRace(){
+        screenA = new ScreenA(canvas, controller.getHorseList());
+        for (var horse:
+             controller.getHorseList()) {
+            horse.startHorse(canvas);
+        }
+        new Thread(() -> {
+            while (controller.isRacing()) {
+                Platform.runLater(() -> {
 
+                    screenA.paint();
+                });
+
+                try {
+                    Thread.sleep(45);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

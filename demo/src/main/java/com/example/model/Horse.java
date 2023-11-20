@@ -24,6 +24,8 @@ public class Horse {
     private Position position;
     private State state;
     private int frameImg;
+    private int horseWidth;
+    private int horseHeight;
 
 
 
@@ -36,6 +38,8 @@ public class Horse {
         frameImg = 0;
         state = State.IDLE;
         position = new Position(0,0);
+        horseWidth = 163;
+        horseHeight = 92;
 
         winningPercentage = 0;
         format = new DecimalFormat("0.0");
@@ -44,6 +48,32 @@ public class Horse {
             Image image = new Image(getClass().getResourceAsStream(PATH+i+".png"));
             runs.add(image);
         }
+    }
+    public void startHorse(Canvas canvas){
+        this.canvas = canvas;
+        this.graphicsContext = this.canvas.getGraphicsContext2D();
+    }
+    public void setPosition(double x, double y){
+        if(position==null)
+            position = new Position(x,y);
+        else {
+            position.setX(x);
+            position.setY(y);
+        }
+    }
+    public void paint(){
+        onMove();
+        if(state == State.IDLE)
+            graphicsContext.drawImage(runs.get(runs.size()-1), position.getX(), position.getY(), horseWidth,horseHeight);
+        else {
+            graphicsContext.drawImage(runs.get(frameImg % 6), position.getX(), position.getY(), horseWidth, horseHeight);
+        }
+
+        if(frameImg>5000)
+            frameImg = 0;
+    }
+    private void onMove(){
+
     }
 
     public String getPercentage(){
