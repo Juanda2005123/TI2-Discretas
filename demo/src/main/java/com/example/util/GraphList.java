@@ -63,6 +63,11 @@ public class GraphList {
         list.get(edge1).add(1,weight);
         list.get(edge2).add(0, edge1);
         list.get(edge2).add(1, weight);
+
+    }
+    public void addEdgeDirigido(int edge1, int edge2, int weight){
+        list.get(edge1).add(0,edge2);
+        list.get(edge1).add(1,weight);
     }
 
     public String printMatrix(){
@@ -330,13 +335,13 @@ public class GraphList {
         graph.addEdge(48, 38, graph.ran.nextInt(1,6));
         graph.addEdge(49, 39, graph.ran.nextInt(1,6));
         graph.addEdge(50, 40, graph.ran.nextInt(1,6));
-        graph.printGraph();
-        graph.getListVertex(1);
+        //graph.printGraph();
+        //graph.getListVertex(1);
 
         System.out.println(graph.dijkstra(1, 12));
 
         graph.fillMatrix();
-        System.out.println(graph.printMatrix());
+        //System.out.println(graph.printMatrix());
         graph.floydWarshall();
         System.out.println(graph.matrix[0][11]);
     }

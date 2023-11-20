@@ -179,11 +179,11 @@ public class MainGameScreenController implements Initializable {
                     VBox h = loader.load();
 
                     PartApuestaRealizadaController tic = loader.getController();
+                    tic.setParent(this);
                     tic.initAttributes(horse.getName(),horse.getImage(5),cantidadApostada);
 
                     apostarCaballo.getChildren().add(h);
                     controller.playerBettingMoney(cantidadApostada);
-                    startRace();
                 } catch (IOException e){
                     throw new RuntimeException(e.getMessage());
                 }
@@ -234,8 +234,38 @@ public class MainGameScreenController implements Initializable {
             throw new RuntimeException(e.getMessage());
         }
     }
+    public void handleIniciarJuego(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vista/screen/ask-game-algorithm-screen.fxml"));
 
-    private void startRace(){
+            Parent root = loader.load();
+            AskGameAlgorithmScreenController askGameAlgorithmScreenController = loader.getController();
+            askGameAlgorithmScreenController.setParent(this);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+
+        } catch (IOException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+    public void handleDirectedFloyd(){
+
+    }
+    public void handleUndirectedFloyd(){
+
+    }
+    public void handleDirectedDijkstra(){
+
+    }
+    public void handleUndirectedDijkstra(){
+
+    }
+
+
+    private void StartRace(){
         screenA = new ScreenA(canvas, controller.getHorseList());
         for (var horse:
              controller.getHorseList()) {

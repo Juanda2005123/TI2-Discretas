@@ -1,5 +1,6 @@
 package com.example.model;
 
+import com.example.util.GraphList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -26,7 +27,7 @@ public class Horse {
     private int frameImg;
     private int horseWidth;
     private int horseHeight;
-
+    private GraphList graph;
 
 
     public Horse(String name, String color){
@@ -48,6 +49,9 @@ public class Horse {
             Image image = new Image(getClass().getResourceAsStream(PATH+i+".png"));
             runs.add(image);
         }
+    }
+    public void newGraph(){
+        graph = new GraphList(50);
     }
     public void startHorse(Canvas canvas){
         this.canvas = canvas;
