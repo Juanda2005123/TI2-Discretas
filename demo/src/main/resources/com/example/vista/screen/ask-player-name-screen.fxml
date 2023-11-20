@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="light-black-background" stylesheets="@../cssStyle/horseMainGame.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.control.AskPlayerNameController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="light-black-background" stylesheets="@../../cssStyle/horseMainGame.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.control.screen.AskPlayerNameScreenController">
    <children>
       <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" styleClass="darker-light-black-background">
          <children>
@@ -29,7 +29,7 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="playerName" alignment="CENTER" prefHeight="50.0" prefWidth="300.0" promptText="Type your Player Name" stylesheets="@../cssStyle/horseMainGame.css">
+                  <TextField fx:id="playerName" alignment="CENTER" prefHeight="50.0" prefWidth="300.0" promptText="Type your Player Name" stylesheets="@../../cssStyle/horseMainGame.css">
                      <styleClass>
                         <String fx:value="grey-white-bold-text" />
                         <String fx:value="horses-apostar" />
@@ -40,18 +40,28 @@
                   </TextField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#iniciarJuego" text="Iniciar Juego">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="horses-apostar" />
-                  <String fx:value="grey-white-bold-text" />
-               </styleClass>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#instrucciones" prefHeight="50.0" prefWidth="150.0" text="Instrucciones">
+                     <styleClass>
+                        <String fx:value="horses-apostar" />
+                        <String fx:value="grey-white-bold-text" />
+                     </styleClass>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#iniciarJuego" prefHeight="50.0" prefWidth="150.0" text="Iniciar Juego">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="horses-apostar" />
+                        <String fx:value="grey-white-bold-text" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
          </children>
          <VBox.margin>
             <Insets top="2.0" />

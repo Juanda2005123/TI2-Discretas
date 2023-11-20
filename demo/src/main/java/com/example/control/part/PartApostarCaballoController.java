@@ -1,5 +1,6 @@
-package com.example.control;
+package com.example.control.part;
 
+import com.example.control.screen.MainGameScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
