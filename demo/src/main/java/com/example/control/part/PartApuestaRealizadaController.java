@@ -31,7 +31,6 @@ public class PartApuestaRealizadaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Controller controller = Controller.getInstance();
-        controller.setRacing(true);
     }
     public void setParent(MainGameScreenController mainGameScreenController){
         parent = mainGameScreenController;

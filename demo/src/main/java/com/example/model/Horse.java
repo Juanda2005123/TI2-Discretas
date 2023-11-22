@@ -28,6 +28,7 @@ public class Horse {
     private int horseWidth;
     private int horseHeight;
     private GraphList graph;
+    private int minimunPath;
 
 
     public Horse(String name, String color){
@@ -50,8 +51,24 @@ public class Horse {
             runs.add(image);
         }
     }
-    public void newGraph(){
-        graph = new GraphList(50);
+    public void newGraphDirected(){
+        graph = new GraphList(51);
+        graph.startNewRandomWeightGraphDirected();
+    }
+    public int getMinimunPath(){
+        return minimunPath;
+    }
+    public void newGraphUndirected(){
+        graph = new GraphList(51);
+        graph.startNewRandomWeightGraphUndirected();
+    }
+    public void graphDijkstra(){
+        minimunPath = graph.dijkstra(1,50);
+    }
+    public void graphfloydWarshall(){
+        graph.fillMatrix();
+        graph.floydWarshall();
+        minimunPath = graph.getMatrix()[0][49];
     }
     public void startHorse(Canvas canvas){
         this.canvas = canvas;

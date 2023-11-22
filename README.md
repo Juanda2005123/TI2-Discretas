@@ -25,7 +25,7 @@ Cada caballo navega por su pista única, luchando contra obstáculos y desafíos
 #### Algoritmo del juego
 
 El juego cuenta con cinco caballos que inician en una pista de carreras al mismo tiempo. 
-Cada caballo tiene una pista realizada con 23 vértices y 60 aristas. 
+Cada caballo tiene una pista realizada con 50 vértices y 141 aristas. 
 Es decir, cada pista de caballo tiene su grafo. 
 Este grafo es recorrido con ayuda de los algoritmos de Dijkstra y Floyd-Warshall. 
 Cada arista tiene asignado un peso que es generado al inicio del juego de manera aleatoria. 
@@ -43,22 +43,6 @@ Cada arista que observa va a tener un peso generado aleatoriamente.
 De tal manera, con los algoritmos, se busca el camino de menor peso.
 
 --------------------------------------------------------------------------------------------------------------------------------------
-
-### Título del juego 2: osu!: El Juego de Ritmo y Precisión
-
-#### Descripción del juego
-
-**osu!** es un emocionante juego de ritmo y precisión que pondrá a prueba tus habilidades de reacción. 
-En este juego tu objetivo es seguir patrones y golpear círculos, 
-deslizar a lo largo de rutas para obtener la máxima puntuación. 
-
-#### Instrucciones del juego
-
-Por terminar por cano.
-
-#### Algoritmo del juego
-
-Por terminar por cano.
 ## Enlace al enunciado
 
 [Enlace al enunciado del problema](https://docs.google.com/document/d/10hhjAGeJ64UNWm14GvJy1Y3xHKX2kzeJjCLxbtblADg/edit)

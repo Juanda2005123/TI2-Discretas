@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainGameScreenController implements Initializable {
@@ -80,7 +81,6 @@ public class MainGameScreenController implements Initializable {
     private Canvas canvas;
     private GraphicsContext graphicsContext;
     private ScreenA screenA;
-
     private Controller controller;
     private PartCantidadApostarController partCantidadApostarController;
 
@@ -252,20 +252,37 @@ public class MainGameScreenController implements Initializable {
         }
     }
     public void handleDirectedFloyd(){
-
+        ArrayList<Horse> horses = (ArrayList<Horse>) controller.getHorseList();
+        for (var horse : horses){
+            horse.newGraphDirected();
+            horse.graphfloydWarshall();
+        }
     }
     public void handleUndirectedFloyd(){
-
+        ArrayList<Horse> horses = (ArrayList<Horse>) controller.getHorseList();
+        for (var horse : horses){
+            horse.newGraphUndirected();
+            horse.graphfloydWarshall();
+        }
     }
     public void handleDirectedDijkstra(){
-
+        ArrayList<Horse> horses = (ArrayList<Horse>) controller.getHorseList();
+        for (var horse : horses){
+            horse.newGraphDirected();
+            horse.graphDijkstra();
+        }
     }
     public void handleUndirectedDijkstra(){
+        ArrayList<Horse> horses = (ArrayList<Horse>) controller.getHorseList();
+        for (var horse : horses){
+            horse.newGraphUndirected();
+            horse.graphDijkstra();
+        }
 
     }
 
 
-    private void StartRace(){
+    private void startRace(){
         screenA = new ScreenA(canvas, controller.getHorseList());
         for (var horse:
              controller.getHorseList()) {

@@ -1,5 +1,6 @@
 package com.example.util;
 
+import com.example.model.Horse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -62,6 +63,25 @@ class GraphListTest {
         graph.addEdge(2,3,4);
 
         assertTrue(graph.getListVertex(1).equals("2(3) "));
+    }
+
+
+    @Test
+    void test1(){
+
+    }
+    @Test
+    void test2(){
+        Horse horse = new Horse("Spirit","Red1");
+        horse.newGraphUndirected();
+        horse.graphDijkstra();
+        int num1 = horse.getMinimunPath();
+        horse.graphfloydWarshall();
+        int num2 = horse.getMinimunPath();
+        System.out.println(num1);
+        System.out.println(num2);
+        assertEquals(num1,num2);
+
     }
 
 }

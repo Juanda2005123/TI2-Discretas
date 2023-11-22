@@ -9,6 +9,10 @@ public class GraphList {
     private Integer[][] matrix;
     private Random ran;
 
+    public Integer[][] getMatrix() {
+        return matrix;
+    }
+
     public int getAmountV() {
         return amountV;
     }
@@ -232,6 +236,40 @@ public class GraphList {
 
 
     }
+    public void startNewRandomWeightGraphDirected(){
+        //First
+        addEdgeDirigido(1,2,ran.nextInt(1,13));
+        addEdgeDirigido(1,3,ran.nextInt(1,13));
+        addEdgeDirigido(1,4,ran.nextInt(1,13));
+        for(int i = 0 ; i < 15 ; i++){
+            for(int j = 0 ; j < 3 ; j++){
+                for(int k = 0 ; k < 3 ; k++){
+                    addEdgeDirigido(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,13));
+                }
+            }
+        }
+        //Last
+        addEdgeDirigido(47,50,ran.nextInt(1,13));
+        addEdgeDirigido(48,50,ran.nextInt(1,13));
+        addEdgeDirigido(49,50,ran.nextInt(1,13));
+    }
+    public void startNewRandomWeightGraphUndirected(){
+        //First
+        addEdge(1,2,ran.nextInt(1,13));
+        addEdge(1,3,ran.nextInt(1,13));
+        addEdge(1,4,ran.nextInt(1,13));
+        for(int i = 0 ; i < 15 ; i++){
+            for(int j = 0 ; j < 3 ; j++){
+                for(int k = 0 ; k < 3 ; k++){
+                    addEdge(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,13));
+                }
+            }
+        }
+        //Last
+        addEdge(47,50,ran.nextInt(1,13));
+        addEdge(48,50,ran.nextInt(1,13));
+        addEdge(49,50,ran.nextInt(1,13));
+    }
 
     public static void main(String[] args) {
         int amountV = 51; // Número de vértices
@@ -249,101 +287,16 @@ public class GraphList {
         graph.addEdge(7, 8, graph.ran.nextInt(1,6));
         graph.addEdge(8, 9, graph.ran.nextInt(1,6));
         graph.addEdge(9, 10, graph.ran.nextInt(1,6));
-        //Fila dos
-        graph.addEdge(11, 12, graph.ran.nextInt(1,6));
-        graph.addEdge(12, 13, graph.ran.nextInt(1,6));
-        graph.addEdge(13, 14, graph.ran.nextInt(1,6));
-        graph.addEdge(14, 15, graph.ran.nextInt(1,6));
-        graph.addEdge(15, 16, graph.ran.nextInt(1,6));
-        graph.addEdge(16, 17, graph.ran.nextInt(1,6));
-        graph.addEdge(17, 18, graph.ran.nextInt(1,6));
-        graph.addEdge(18, 19, graph.ran.nextInt(1,6));
-        graph.addEdge(19, 20, graph.ran.nextInt(1,6));
-        //Fila tres
-        graph.addEdge(21, 22, graph.ran.nextInt(1,6));
-        graph.addEdge(22, 23, graph.ran.nextInt(1,6));
-        graph.addEdge(23, 24, graph.ran.nextInt(1,6));
-        graph.addEdge(24, 25, graph.ran.nextInt(1,6));
-        graph.addEdge(25, 26, graph.ran.nextInt(1,6));
-        graph.addEdge(26, 27, graph.ran.nextInt(1,6));
-        graph.addEdge(27, 28, graph.ran.nextInt(1,6));
-        graph.addEdge(28, 29, graph.ran.nextInt(1,6));
-        graph.addEdge(29, 30, graph.ran.nextInt(1,6));
-        //Fila cuatro
-        graph.addEdge(31, 32, graph.ran.nextInt(1,6));
-        graph.addEdge(32, 33, graph.ran.nextInt(1,6));
-        graph.addEdge(33, 34, graph.ran.nextInt(1,6));
-        graph.addEdge(34, 35, graph.ran.nextInt(1,6));
-        graph.addEdge(35, 36, graph.ran.nextInt(1,6));
-        graph.addEdge(36, 37, graph.ran.nextInt(1,6));
-        graph.addEdge(37, 38, graph.ran.nextInt(1,6));
-        graph.addEdge(38, 39, graph.ran.nextInt(1,6));
-        graph.addEdge(39, 40, graph.ran.nextInt(1,6));
-        //Fila cinco
-        graph.addEdge(41, 42, graph.ran.nextInt(1,6));
-        graph.addEdge(42, 43, graph.ran.nextInt(1,6));
-        graph.addEdge(43, 44, graph.ran.nextInt(1,6));
-        graph.addEdge(44, 45, graph.ran.nextInt(1,6));
-        graph.addEdge(45, 46, graph.ran.nextInt(1,6));
-        graph.addEdge(46, 47, graph.ran.nextInt(1,6));
-        graph.addEdge(47, 48, graph.ran.nextInt(1,6));
-        graph.addEdge(48, 49, graph.ran.nextInt(1,6));
-        graph.addEdge(49, 50, graph.ran.nextInt(1,6));
 
-        //Vertical
-        //Columna uno
-        graph.addEdge(1, 11, graph.ran.nextInt(1,6));
-        graph.addEdge(2, 12, graph.ran.nextInt(1,6));
-        graph.addEdge(3, 13, graph.ran.nextInt(1,6));
-        graph.addEdge(4, 14, graph.ran.nextInt(1,6));
-        graph.addEdge(5, 15, graph.ran.nextInt(1,6));
-        graph.addEdge(6, 16, graph.ran.nextInt(1,6));
-        graph.addEdge(7, 17, graph.ran.nextInt(1,6));
-        graph.addEdge(8, 18, graph.ran.nextInt(1,6));
-        graph.addEdge(9, 19, graph.ran.nextInt(1,6));
-        graph.addEdge(10, 20, graph.ran.nextInt(1,6));
-        //Columna dos
-        graph.addEdge(21, 11, graph.ran.nextInt(1,6));
-        graph.addEdge(22, 12, graph.ran.nextInt(1,6));
-        graph.addEdge(23, 13, graph.ran.nextInt(1,6));
-        graph.addEdge(24, 14, graph.ran.nextInt(1,6));
-        graph.addEdge(25, 15, graph.ran.nextInt(1,6));
-        graph.addEdge(26, 16, graph.ran.nextInt(1,6));
-        graph.addEdge(27, 17, graph.ran.nextInt(1,6));
-        graph.addEdge(28, 18, graph.ran.nextInt(1,6));
-        graph.addEdge(29, 19, graph.ran.nextInt(1,6));
-        graph.addEdge(30, 20, graph.ran.nextInt(1,6));
-        //Columna tres
-        graph.addEdge(21, 31, graph.ran.nextInt(1,6));
-        graph.addEdge(22, 32, graph.ran.nextInt(1,6));
-        graph.addEdge(23, 33, graph.ran.nextInt(1,6));
-        graph.addEdge(24, 34, graph.ran.nextInt(1,6));
-        graph.addEdge(25, 35, graph.ran.nextInt(1,6));
-        graph.addEdge(26, 36, graph.ran.nextInt(1,6));
-        graph.addEdge(27, 37, graph.ran.nextInt(1,6));
-        graph.addEdge(28, 38, graph.ran.nextInt(1,6));
-        graph.addEdge(29, 39, graph.ran.nextInt(1,6));
-        graph.addEdge(30, 40, graph.ran.nextInt(1,6));
-        //Columna cuatro
-        graph.addEdge(41, 31, graph.ran.nextInt(1,6));
-        graph.addEdge(42, 32, graph.ran.nextInt(1,6));
-        graph.addEdge(43, 33, graph.ran.nextInt(1,6));
-        graph.addEdge(44, 34, graph.ran.nextInt(1,6));
-        graph.addEdge(45, 35, graph.ran.nextInt(1,6));
-        graph.addEdge(46, 36, graph.ran.nextInt(1,6));
-        graph.addEdge(47, 37, graph.ran.nextInt(1,6));
-        graph.addEdge(48, 38, graph.ran.nextInt(1,6));
-        graph.addEdge(49, 39, graph.ran.nextInt(1,6));
-        graph.addEdge(50, 40, graph.ran.nextInt(1,6));
         //graph.printGraph();
         //graph.getListVertex(1);
 
-        System.out.println(graph.dijkstra(1, 12));
+        System.out.println(graph.dijkstra(1, 2));
 
         graph.fillMatrix();
         //System.out.println(graph.printMatrix());
         graph.floydWarshall();
-        System.out.println(graph.matrix[0][11]);
+        System.out.println(graph.matrix[0][1]);
     }
 }
 
