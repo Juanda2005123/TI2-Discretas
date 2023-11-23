@@ -2,6 +2,7 @@ package com.example.control.screen;
 
 import com.example.control.*;
 import com.example.control.part.*;
+import com.example.model.Bet;
 import com.example.model.Horse;
 import com.example.screens.ScreenA;
 import javafx.application.Platform;
@@ -194,7 +195,6 @@ public class MainGameScreenController implements Initializable {
                     alert.showAndWait();
                 } else {
                     controller.rechargePlayerMoney(money);
-                    //handleApostar(partCantidadApostarController.getHorseName());
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText(null);
                     alert.setTitle("Successful recharge");
@@ -326,6 +326,23 @@ public class MainGameScreenController implements Initializable {
         } catch (IOException e){
             throw new RuntimeException(e.getMessage());
         }
+    }
+    public void betInformation(Bet bet, boolean first, boolean second){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Results of the bet");
+        if(first){
+            bet.winMoney();
+            alert.setContentText(controller.getPlayer().getName()+" has earned $"+bet.getMoney());
+        } else if (second){
+            bet.secondMoney();
+            alert.setContentText(controller.getPlayer().getName()+" has earned $"+bet.getMoney());
+        } else {
+            alert.setContentText(controller.getPlayer().getName()+" has lost $"+bet.getMoney());
+            bet.loseMoney();
+        }
+        controller.rechargePlayerMoney(bet.getMoney());
+        alert.showAndWait();
     }
 
 

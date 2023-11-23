@@ -55,7 +55,7 @@ public class Horse {
         horseHeight = 92;
 
         winningPercentage = 0;
-        format = new DecimalFormat("0.00");
+        format = new DecimalFormat("0.0");
 
         for (int i = 0; i < 6 ; i++){
             Image image = new Image(getClass().getResourceAsStream(PATH+i+".png"));
@@ -186,8 +186,11 @@ public class Horse {
         return winningPercentage;
     }
 
-    public void setWinningPercentage(int totalRaces) {
-        this.winningPercentage = (double) (wins/totalRaces)*100;
+    public void setWinningPercentage(double totalRaces) {
+        System.out.println("WINS"+wins);
+        System.out.println("TotalRACES"+totalRaces);
+        this.winningPercentage = (this.wins / totalRaces) * 100;
+        System.out.println(winningPercentage);
     }
 
     public Image getImage(int i){

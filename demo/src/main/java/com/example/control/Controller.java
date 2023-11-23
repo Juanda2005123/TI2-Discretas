@@ -82,6 +82,10 @@ public class Controller {
 
             mainGameScreenController.fillTablaResultadosCaballos();
             mainGameScreenController.fillApostarCaballo();
+            boolean first = podiumHorse.get(0).equals(player.getBet().getHorseName());
+            boolean second = podiumHorse.get(1).equals(player.getBet().getHorseName());
+            mainGameScreenController.betInformation(player.getBet(), first, second);
+
             for(int i = 0 ; i < 5 ; i++){
                 podiumHorse.remove(0);
             }

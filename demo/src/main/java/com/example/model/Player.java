@@ -7,6 +7,7 @@ public class Player {
     private String name;
     private int racesWins;
     private double earnings;
+    private Bet bet;
 
     public int getMoney() {
         return money;
@@ -15,6 +16,14 @@ public class Player {
         DecimalFormat format = new DecimalFormat("#,###");
 
         return "$"+format.format(money);
+    }
+
+    public Bet getBet() {
+        return bet;
+    }
+
+    public void setBet(Bet bet) {
+        this.bet = bet;
     }
 
     public void setMoney(int money) {
