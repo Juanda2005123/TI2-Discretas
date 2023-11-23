@@ -13,8 +13,7 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PartApuestaRealizadaController implements Initializable {
-
+public class PartAlgoritmoSeleccionadoController implements Initializable {
     @FXML
     private Label horseName;
 
@@ -23,25 +22,14 @@ public class PartApuestaRealizadaController implements Initializable {
 
     @FXML
     private Label outputApuesta;
-    @FXML
-    private Button buttonIniciarJuego;
-    private MainGameScreenController parent;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
-    public void setParent(MainGameScreenController mainGameScreenController){
-        parent = mainGameScreenController;
-    }
-    @FXML
-    void iniciarJuego(ActionEvent event) {
-        parent.handleIniciarJuego(horseName.getText(), image.getImage(), outputApuesta.getText());
-    }
 
-    public void initAttributes(String horseName, Image image, int apuesta){
+    public void initAttributes(String horseName, Image image, String apuesta){
         this.horseName.setText(horseName);
         this.image.setImage(image);
-        outputApuesta.setText("$"+apuesta);
+        outputApuesta.setText(apuesta);
     }
 }

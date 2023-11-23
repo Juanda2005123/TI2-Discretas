@@ -238,37 +238,37 @@ public class GraphList {
     }
     public void startNewRandomWeightGraphDirected(){
         //First
-        addEdgeDirigido(1,2,ran.nextInt(1,13));
-        addEdgeDirigido(1,3,ran.nextInt(1,13));
-        addEdgeDirigido(1,4,ran.nextInt(1,13));
+        addEdgeDirigido(1,2,ran.nextInt(1,8));
+        addEdgeDirigido(1,3,ran.nextInt(1,8));
+        addEdgeDirigido(1,4,ran.nextInt(1,8));
         for(int i = 0 ; i < 15 ; i++){
             for(int j = 0 ; j < 3 ; j++){
                 for(int k = 0 ; k < 3 ; k++){
-                    addEdgeDirigido(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,13));
+                    addEdgeDirigido(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
                 }
             }
         }
         //Last
-        addEdgeDirigido(47,50,ran.nextInt(1,13));
-        addEdgeDirigido(48,50,ran.nextInt(1,13));
-        addEdgeDirigido(49,50,ran.nextInt(1,13));
+        addEdgeDirigido(47,50,ran.nextInt(1,8));
+        addEdgeDirigido(48,50,ran.nextInt(1,8));
+        addEdgeDirigido(49,50,ran.nextInt(1,8));
     }
     public void startNewRandomWeightGraphUndirected(){
         //First
-        addEdge(1,2,ran.nextInt(1,13));
-        addEdge(1,3,ran.nextInt(1,13));
-        addEdge(1,4,ran.nextInt(1,13));
+        addEdge(1,2,ran.nextInt(1,8));
+        addEdge(1,3,ran.nextInt(1,8));
+        addEdge(1,4,ran.nextInt(1,8));
         for(int i = 0 ; i < 15 ; i++){
             for(int j = 0 ; j < 3 ; j++){
                 for(int k = 0 ; k < 3 ; k++){
-                    addEdge(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,13));
+                    addEdge(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
                 }
             }
         }
         //Last
-        addEdge(47,50,ran.nextInt(1,13));
-        addEdge(48,50,ran.nextInt(1,13));
-        addEdge(49,50,ran.nextInt(1,13));
+        addEdge(47,50,ran.nextInt(1,8));
+        addEdge(48,50,ran.nextInt(1,8));
+        addEdge(49,50,ran.nextInt(1,8));
     }
 
     public static void main(String[] args) {

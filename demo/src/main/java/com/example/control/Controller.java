@@ -15,6 +15,7 @@ public class Controller {
     private boolean firstRace;
     private boolean racing;
     private Player player;
+    private ArrayList<String> podiumHorse;
 
     public static Controller getInstance(){
         if(controller==null) {
@@ -25,6 +26,7 @@ public class Controller {
 
 
     private Controller(){
+        podiumHorse = new ArrayList<>();
         racing = false;
         horseList = new ArrayList<>();
         totalRaces = 0;
@@ -43,6 +45,12 @@ public class Controller {
     }
     public Player getPlayer(){
         return player;
+    }
+    public void addFinishedHorse(String name){
+        podiumHorse.add(name);
+        if(podiumHorse.size()==5){
+            racing = false;
+        }
     }
 
     public List<Horse> getHorseList(){

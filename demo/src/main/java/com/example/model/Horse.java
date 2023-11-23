@@ -1,5 +1,6 @@
 package com.example.model;
 
+import com.example.control.Controller;
 import com.example.util.GraphList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Horse {
     private String name;
@@ -29,6 +31,11 @@ public class Horse {
     private int horseHeight;
     private GraphList graph;
     private int minimunPath;
+    private ArrayList<Double> animationSpeed;
+    private ArrayList<Integer> countSpeed;
+    private int runAnimation;
+    private int countAnimation;
+    private Controller controller;
 
 
     public Horse(String name, String color){
@@ -71,8 +78,13 @@ public class Horse {
         minimunPath = graph.getMatrix()[0][49];
     }
     public void startHorse(Canvas canvas){
+        controller = Controller.getInstance();
+        runAnimation = 0;
+        countAnimation = 0;
+        animation();
         this.canvas = canvas;
         this.graphicsContext = this.canvas.getGraphicsContext2D();
+        state = State.RUN;
     }
     public void setPosition(double x, double y){
         if(position==null)
@@ -88,13 +100,49 @@ public class Horse {
             graphicsContext.drawImage(runs.get(runs.size()-1), position.getX(), position.getY(), horseWidth,horseHeight);
         else {
             graphicsContext.drawImage(runs.get(frameImg % 6), position.getX(), position.getY(), horseWidth, horseHeight);
+            frameImg++;
         }
-
-        if(frameImg>5000)
-            frameImg = 0;
     }
     private void onMove(){
+        if(state == State.RUN){
+            if(countAnimation<countSpeed.size()){
 
+                if(runAnimation<countSpeed.get(countAnimation)){
+                    runAnimation++;
+                } else {
+                    countAnimation++;
+                    runAnimation = 0;
+                }
+                if(countAnimation!=countSpeed.size()){
+                    position.setX(position.getX() + animationSpeed.get(countAnimation));
+                }
+            } else {
+                controller.addFinishedHorse(name);
+                state = State.IDLE;
+            }
+
+        } else {
+            frameImg = 0;
+        }
+    }
+    private void animation(){
+        double animate = (double) minimunPath /100;
+        animationSpeed = new ArrayList<>();
+        countSpeed = new ArrayList<>();
+        Random ran = new Random();
+        int i = 0;
+
+        while (i!=100){
+            int count = ran.nextInt(10,31);
+            if((i+count)>100){
+                count = 100-i;
+                i = 100;
+            } else {
+                i += count;
+            }
+            countSpeed.add(count);
+            animationSpeed.add(count*animate);
+        }
     }
 
     public String getPercentage(){

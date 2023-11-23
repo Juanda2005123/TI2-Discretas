@@ -1,10 +1,7 @@
 package com.example.control.screen;
 
 import com.example.control.*;
-import com.example.control.part.PartApostarCaballoController;
-import com.example.control.part.PartApuestaRealizadaController;
-import com.example.control.part.PartCantidadApostarController;
-import com.example.control.part.PartResultadosAnterioresController;
+import com.example.control.part.*;
 import com.example.model.Horse;
 import com.example.screens.ScreenA;
 import javafx.application.Platform;
@@ -18,6 +15,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -234,7 +232,7 @@ public class MainGameScreenController implements Initializable {
             throw new RuntimeException(e.getMessage());
         }
     }
-    public void handleIniciarJuego(){
+    public void handleIniciarJuego(String horseName, Image image, String outputApuesta){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vista/screen/ask-game-algorithm-screen.fxml"));
 
@@ -246,7 +244,28 @@ public class MainGameScreenController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.showAndWait();
+            controller.setRacing(true);
 
+            handleAlgoritmoSeleccionado(horseName, image, outputApuesta);
+
+        } catch (IOException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+    public void handleAlgoritmoSeleccionado(String horseName, Image image, String outputApuesta) {
+
+        apostarCaballo.getChildren().clear();
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/com/example/vista/part/part-algoritmo-seleccionado.fxml"));
+
+            VBox h = loader.load();
+
+            PartAlgoritmoSeleccionadoController tic = loader.getController();
+            tic.initAttributes(horseName,image,outputApuesta);
+
+            apostarCaballo.getChildren().add(h);
+            startRace();
         } catch (IOException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -291,12 +310,11 @@ public class MainGameScreenController implements Initializable {
         new Thread(() -> {
             while (controller.isRacing()) {
                 Platform.runLater(() -> {
-
                     screenA.paint();
                 });
 
                 try {
-                    Thread.sleep(45);
+                    Thread.sleep(65);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
