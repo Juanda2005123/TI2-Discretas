@@ -1,5 +1,6 @@
 package com.example.control;
 
+import com.example.control.screen.MainGameScreenController;
 import com.example.model.Horse;
 import com.example.model.Player;
 
@@ -16,6 +17,7 @@ public class Controller {
     private boolean racing;
     private Player player;
     private ArrayList<String> podiumHorse;
+    private MainGameScreenController mainGameScreenController;
 
     public static Controller getInstance(){
         if(controller==null) {
@@ -24,6 +26,10 @@ public class Controller {
         return controller;
     }
 
+
+    public void setMainGameScreenController(MainGameScreenController mainGameScreenController) {
+        this.mainGameScreenController = mainGameScreenController;
+    }
 
     private Controller(){
         podiumHorse = new ArrayList<>();
@@ -48,9 +54,40 @@ public class Controller {
     }
     public void addFinishedHorse(String name){
         podiumHorse.add(name);
-        if(podiumHorse.size()==5){
+
+        if(podiumHorse.size()==5) {
+            totalRaces++;
             racing = false;
+            String[][] ma = new String[5][2];
+            for (int i = 0; i < 5 ; i++){
+                for(int j = 0 ; j < horseList.size() ; j++){
+                    if(podiumHorse.get(i).equals(horseList.get(j).getName())){
+                        ma[i][0] = horseList.get(j).getName();
+
+                        ma[i][1] = "("+(double) horseList.get(j).getRaceTime()/1000+" segundos)";
+                    }
+                }
+            }
+            for(int i = 0 ; i < horseList.size() ; i++){
+                if(podiumHorse.get(0).equals(horseList.get(i).getName())){
+                    horseList.get(i).setWins(horseList.get(i).getWins()+1);
+                }
+            }
+            for(var horse : horseList){
+                horse.setWinningPercentage(totalRaces);
+            }
+            mainGameScreenController.fillTablaResultados(ma[0][0],ma[0][1],
+                    ma[1][0],ma[1][1],ma[2][0],ma[2][1],ma[3][0],ma[3][1],
+                    ma[4][0],ma[4][1]);
+
+            mainGameScreenController.fillTablaResultadosCaballos();
+            mainGameScreenController.fillApostarCaballo();
+            for(int i = 0 ; i < 5 ; i++){
+                podiumHorse.remove(0);
+            }
+            firstRace = false;
         }
+
     }
 
     public List<Horse> getHorseList(){
@@ -85,4 +122,39 @@ public class Controller {
         return horseList.get(i);
     }
 
+    public static Controller getController() {
+        return controller;
+    }
+
+    public static void setController(Controller controller) {
+        Controller.controller = controller;
+    }
+
+    public void setHorseList(List<Horse> horseList) {
+        this.horseList = horseList;
+    }
+
+    public int getTotalRaces() {
+        return totalRaces;
+    }
+
+    public void setTotalRaces(int totalRaces) {
+        this.totalRaces = totalRaces;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public ArrayList<String> getPodiumHorse() {
+        return podiumHorse;
+    }
+
+    public void setPodiumHorse(ArrayList<String> podiumHorse) {
+        this.podiumHorse = podiumHorse;
+    }
+
+    public MainGameScreenController getMainGameScreenController() {
+        return mainGameScreenController;
+    }
 }

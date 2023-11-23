@@ -72,12 +72,12 @@
                               <Font size="25.0" />
                            </font>
                         </Button>
-                        <Label fx:id="resultadosNumero" prefWidth="260.0" styleClass="grey-white-bold-text" stylesheets="@../../cssStyle/horseMainGame.css" text="Resultados">
+                        <Label fx:id="resultadosNumero" alignment="CENTER" prefWidth="600.0" styleClass="grey-white-bold-text" stylesheets="@../../cssStyle/horseMainGame.css" text="Resultados">
                            <font>
                               <Font size="50.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="274.0" />
+                              <Insets left="120.0" />
                            </HBox.margin>
                         </Label>
                      </children>
@@ -85,107 +85,6 @@
                         <Insets left="30.0" />
                      </padding>
                   </HBox>
-                  <VBox fx:id="vBoxtablaResultados" alignment="TOP_CENTER" prefHeight="225.0" prefWidth="1328.0" styleClass="light-black-background" stylesheets="@../../cssStyle/horseMainGame.css">
-                     <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="98.0" prefWidth="1328.0" spacing="200.0" styleClass="darker-light-black-background" stylesheets="@../../cssStyle/horseMainGame.css">
-                           <children>
-                              <Label fx:id="ganadorCarrera" prefWidth="600.0" styleClass="grey-white-bold-text" text="El Ganador es Red Rum">
-                                 <font>
-                                    <Font size="40.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <Label fx:id="ganadorSegundos" alignment="CENTER" contentDisplay="CENTER" layoutX="310.0" layoutY="30.0" prefWidth="300.0" styleClass="grey-white-text" text="(28 segundos)">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets right="60.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="1328.0" spacing="200.0" styleClass="darker-light-black-background">
-                           <VBox.margin>
-                              <Insets top="2.0" />
-                           </VBox.margin>
-                           <children>
-                              <Label fx:id="segundoCarrera" prefWidth="600.0" styleClass="grey-white-bold-text" text="Segundo Puesto: Red Rum">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="segundoSegundos" alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" styleClass="grey-white-text" text="(30 segundos)">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets right="60.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="1328.0" spacing="200.0" styleClass="darker-light-black-background">
-                           <VBox.margin>
-                              <Insets top="1.0" />
-                           </VBox.margin>
-                           <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="600.0">
-                                 <children>
-                                    <Label fx:id="terceroCarrera" prefWidth="600.0" styleClass="grey-white-bold-text" text="Tercer Puesto: Red Rum">
-                                       <font>
-                                          <Font size="17.5" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="cuartoCarrera" layoutX="10.0" layoutY="10.0" prefWidth="600.0" styleClass="grey-white-bold-text" text="Cuarto Puesto: Red Rum">
-                                       <font>
-                                          <Font size="17.5" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="quintoCarrera" layoutX="10.0" layoutY="35.0" prefWidth="600.0" styleClass="grey-white-bold-text" text="Quinto Puesto: Red Rum">
-                                       <font>
-                                          <Font size="17.5" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0">
-                                 <children>
-                                    <Label fx:id="terceroSegundos" alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" styleClass="grey-white-text" text="(37 segundos)">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets top="2.5" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label fx:id="cuartoSegundos" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="40.0" prefWidth="300.0" styleClass="grey-white-text" text="(44 segundos)">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets top="4.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label fx:id="quintoSegundos" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="50.0" prefWidth="300.0" styleClass="grey-white-text" text="(102 segundos)">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets top="4.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                           <padding>
-                              <Insets right="60.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </VBox>
                </children>
                <VBox.margin>
                   <Insets />

@@ -32,24 +32,9 @@ public class MainGameScreenController implements Initializable {
     private VBox apostarCaballo;
 
     @FXML
-    private Label cuartoCarrera;
-
-    @FXML
-    private Label cuartoSegundos;
-
-    @FXML
-    private Label ganadorCarrera;
-
-    @FXML
-    private Label ganadorSegundos;
-    @FXML
     private VBox juego;
 
-    @FXML
-    private Label quintoCarrera;
 
-    @FXML
-    private Label quintoSegundos;
 
     @FXML
     private VBox resultadosAnteriores;
@@ -59,18 +44,6 @@ public class MainGameScreenController implements Initializable {
 
     @FXML
     private VBox resultadosPartida;
-
-    @FXML
-    private Label segundoCarrera;
-
-    @FXML
-    private Label segundoSegundos;
-
-    @FXML
-    private Label terceroCarrera;
-
-    @FXML
-    private Label terceroSegundos;
 
     @FXML
     private VBox vBoxtablaResultados;
@@ -91,15 +64,17 @@ public class MainGameScreenController implements Initializable {
 
         fillTablaResultadosCaballos();
         fillApostarCaballo();
-
+/**
         if(controller.isFirstRace()){
-            vBoxtablaResultados.getChildren().clear();
-            vBoxtablaResultados.setStyle("-fx-background-color: #141414");
+            resultadosPartida.getChildren().remove(1);
+            resultadosPartida.setStyle("-fx-background-color: #141414");
         }
+ */
         partCantidadApostarController = null;
 
     }
-    private void fillTablaResultadosCaballos(){
+    public void fillTablaResultadosCaballos(){
+        resultadosAnteriores.getChildren().clear();
         for (int i = 0; i < 5; i++){
             try{
                 Horse horse = controller.getHorse(i);
@@ -116,7 +91,7 @@ public class MainGameScreenController implements Initializable {
             }
         }
     }
-    private void fillApostarCaballo(){
+    public void fillApostarCaballo(){
         apostarCaballo.getChildren().clear();
         for (int i = 0; i < 5; i++){
             try{
@@ -143,6 +118,7 @@ public class MainGameScreenController implements Initializable {
             if(horseName.equals(horse.getName())){
                 apostarCaballo.getChildren().clear();
                 try{
+                    controller.setRacing(true);
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/com/example/vista/part/part-cantidad-apostar.fxml"));
 
@@ -195,7 +171,7 @@ public class MainGameScreenController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText(null);
                 alert.setTitle("Invalid recharge");
-                alert.setContentText("Recharges are not possible while horses are running");
+                alert.setContentText("Recharges are not possible in this moment");
                 alert.showAndWait();
             }else {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vista/screen/recargar-dinero-screen.fxml"));
@@ -218,7 +194,7 @@ public class MainGameScreenController implements Initializable {
                     alert.showAndWait();
                 } else {
                     controller.rechargePlayerMoney(money);
-                    handleApostar(partCantidadApostarController.getHorseName());
+                    //handleApostar(partCantidadApostarController.getHorseName());
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText(null);
                     alert.setTitle("Successful recharge");
@@ -244,7 +220,6 @@ public class MainGameScreenController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.showAndWait();
-            controller.setRacing(true);
 
             handleAlgoritmoSeleccionado(horseName, image, outputApuesta);
 
@@ -302,6 +277,7 @@ public class MainGameScreenController implements Initializable {
 
 
     private void startRace(){
+        controller.setMainGameScreenController(this);
         screenA = new ScreenA(canvas, controller.getHorseList());
         for (var horse:
              controller.getHorseList()) {
@@ -314,11 +290,44 @@ public class MainGameScreenController implements Initializable {
                 });
 
                 try {
-                    Thread.sleep(65);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
+    public void fillTablaResultados(String ganador, String ganadorSeg,
+                                    String segundo, String segundoSeg,
+                                    String tercero, String terceroSeg,
+                                    String cuarto, String cuartoSeg,
+                                    String quinto, String quintoSeg){
+
+
+        if(!controller.isFirstRace()){
+            resultadosPartida.getChildren().remove(1);
+
+        }
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/com/example/vista/part/part-resultados-partida.fxml"));
+
+            VBox h = loader.load();
+
+            PartResultadosPartidaController tic = loader.getController();
+            tic.initAttributes(ganador, ganadorSeg,
+                    segundo, segundoSeg,
+                    tercero, terceroSeg,
+                    cuarto, cuartoSeg,
+                    quinto, quintoSeg);
+
+            resultadosNumero.setText("Resultados Carrera #"+controller.getTotalRaces());
+            resultadosPartida.getChildren().add(h);
+        } catch (IOException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+
+
 }

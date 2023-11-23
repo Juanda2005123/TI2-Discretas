@@ -48,6 +48,7 @@ public class PartCantidadApostarController implements Initializable {
     }
     @FXML
     void cancelarApuesta(ActionEvent event) {
+        controller.setRacing(false);
         mainGameScreenController.handleCancelarApuestaPropia();
     }
 

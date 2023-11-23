@@ -36,9 +36,13 @@ public class Horse {
     private int runAnimation;
     private int countAnimation;
     private Controller controller;
+    private Random ran = new Random();
+    private long raceTime;
+    private com.example.model.Timer timer;
 
 
     public Horse(String name, String color){
+        timer = new Timer();
         this.name = name;
         PATH = "/com/example/img/"+color+"/";
         runs = new ArrayList<>();
@@ -51,7 +55,7 @@ public class Horse {
         horseHeight = 92;
 
         winningPercentage = 0;
-        format = new DecimalFormat("0.0");
+        format = new DecimalFormat("0.00");
 
         for (int i = 0; i < 6 ; i++){
             Image image = new Image(getClass().getResourceAsStream(PATH+i+".png"));
@@ -85,6 +89,7 @@ public class Horse {
         this.canvas = canvas;
         this.graphicsContext = this.canvas.getGraphicsContext2D();
         state = State.RUN;
+        timer.start();
     }
     public void setPosition(double x, double y){
         if(position==null)
@@ -104,36 +109,44 @@ public class Horse {
         }
     }
     private void onMove(){
-        if(state == State.RUN){
-            if(countAnimation<countSpeed.size()){
+        if(state == State.RUN) {
+            if(position.getX()<1000){
+                if (countAnimation < animationSpeed.size()) {
 
-                if(runAnimation<countSpeed.get(countAnimation)){
-                    runAnimation++;
+                    if (runAnimation < (2520 / animationSpeed.size())) {
+                        runAnimation += 40;
+                    } else {
+                        countAnimation++;
+                        runAnimation = 0;
+                    }
+                    if (countAnimation != countSpeed.size()) {
+                        position.setX(position.getX() + animationSpeed.get(countAnimation));
+                    }
                 } else {
-                    countAnimation++;
-                    runAnimation = 0;
-                }
-                if(countAnimation!=countSpeed.size()){
-                    position.setX(position.getX() + animationSpeed.get(countAnimation));
+                    countAnimation = ran.nextInt(5);
                 }
             } else {
-                controller.addFinishedHorse(name);
+                raceTime = timer.stop();
                 state = State.IDLE;
+                controller.addFinishedHorse(name);
             }
+
+
+
 
         } else {
             frameImg = 0;
         }
     }
     private void animation(){
+        minimunPath = 40;
         double animate = (double) minimunPath /100;
         animationSpeed = new ArrayList<>();
         countSpeed = new ArrayList<>();
-        Random ran = new Random();
         int i = 0;
 
         while (i!=100){
-            int count = ran.nextInt(10,31);
+            int count = ran.nextInt(11,31);
             if((i+count)>100){
                 count = 100-i;
                 i = 100;
@@ -147,6 +160,10 @@ public class Horse {
 
     public String getPercentage(){
         return format.format(winningPercentage)+"%";
+    }
+
+    public long getRaceTime() {
+        return raceTime;
     }
 
     public String getName() {
