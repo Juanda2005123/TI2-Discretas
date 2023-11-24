@@ -27,8 +27,8 @@ public class Horse {
     private Position position;
     private State state;
     private int frameImg;
-    private int horseWidth;
-    private int horseHeight;
+    private final int horseWidth;
+    private final int horseHeight;
     private GraphList graph;
     private int minimunPath;
     private ArrayList<Double> animationSpeed;
@@ -36,9 +36,9 @@ public class Horse {
     private int runAnimation;
     private int countAnimation;
     private Controller controller;
-    private Random ran = new Random();
+    private final Random ran = new Random();
     private long raceTime;
-    private com.example.model.Timer timer;
+    private final com.example.model.Timer timer;
 
 
     public Horse(String name, String color){
@@ -180,10 +180,6 @@ public class Horse {
 
     public void setWins(int wins) {
         this.wins = wins;
-    }
-
-    public double getWinningPercentage() {
-        return winningPercentage;
     }
 
     public void setWinningPercentage(double totalRaces) {
