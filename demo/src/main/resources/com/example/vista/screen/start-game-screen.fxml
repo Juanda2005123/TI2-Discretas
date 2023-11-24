@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="hBox" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="972.0" prefWidth="1728.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.control.screen.StartGameScreenController">
+   <children>
+      <ImageView fitHeight="972.0" fitWidth="1728.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/main-page-bg.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="400.0" styleClass="myVBox" stylesheets="@../../cssStyle/horseMainGame.css">
+         <children>
+            <Label text="Cambiar boton, organizar front y eso. No quiero mas front">
+               <padding>
+                  <Insets top="400.0" />
+               </padding>
+            </Label>
+            <Button fx:id="botton" mnemonicParsing="false" onAction="#jugar" prefHeight="120.0" prefWidth="180.0" styleClass="startButton" stylesheets="@../../cssStyle/horseMainGame.css" text="Jugar">
+               <font>
+                  <Font name="Tahoma" size="40.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </VBox>
+   </children>
+</HBox>
