@@ -3,14 +3,12 @@ import org.controlsfx.control.spreadsheet.SpreadsheetCellType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GraphList<T> {
     private int amountV;
-    private List<Vertex<T>> list;
+    private final List<Vertex<T>> list;
 
     private Integer[][] matrix;
-    private Random ran;
 
     public Integer[][] getMatrix() {
         return matrix;
@@ -26,7 +24,6 @@ public class GraphList<T> {
 
     public GraphList(){
         this.amountV = 0;
-        ran = new Random();
         list = new ArrayList<Vertex<T>>();
 
     }
@@ -119,7 +116,6 @@ public class GraphList<T> {
                     }
                 }
 
-                break;
 
             }
         }
@@ -135,9 +131,6 @@ public class GraphList<T> {
                         break;
                     }
                 }
-
-                break;
-
             }
         }
     }

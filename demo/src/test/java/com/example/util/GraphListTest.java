@@ -150,7 +150,7 @@ class GraphListTest {
         graph.addVertex(1, 2, 3);
         graph.addVertex(2, 3, 4);
         graph.addVertex(3,4,5);
-        graph.deleteEdge(2, 3);
+        graph.deleteEdge(2,3);
         assertFalse(graph.checkConnect(2,3));
     }
 
@@ -271,21 +271,7 @@ class GraphListTest {
         graph.addVertex(6, 5, 4);
         graph.fillMatrix();
         graph.floydWarshall();
-
-
-            for (int i = 0; i < graph.getMatrix().length; i++) {
-                for (int j = 0; j < graph.getMatrix()[i].length; j++) {
-                    if(graph.getMatrix()[i][j] == Integer.MAX_VALUE){
-                        System.out.print(" I " + "| ");
-                    }else{
-                        System.out.print(graph.getMatrix()[i][j] + "| ");
-                    }
-
-                }
-                System.out.println();
-            }
-
-
+        
         assertEquals(22, graph.getMatrix()[4][0]);
     }
 
