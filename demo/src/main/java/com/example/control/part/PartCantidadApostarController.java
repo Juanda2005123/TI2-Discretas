@@ -3,7 +3,6 @@ package com.example.control.part;
 import com.example.control.Controller;
 import com.example.control.screen.MainGameScreenController;
 import com.example.exceptions.InvalidMoneyBetException;
-import com.example.exceptions.InvalidMoneyRechargeException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
