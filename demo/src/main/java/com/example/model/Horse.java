@@ -63,15 +63,40 @@ public class Horse {
         }
     }
     public void newGraphDirected(){
-        graph = new GraphList(51);
-        graph.startNewRandomWeightGraphDirected();
+        graph = new GraphList();
+        graph.addVertexDirigido(1,2,ran.nextInt(1,8));
+        graph. addVertexDirigido(1,3,ran.nextInt(1,8));
+        graph.addVertexDirigido(1,4,ran.nextInt(1,8));
+        for(int i = 0 ; i < 15 ; i++){
+            for(int j = 0 ; j < 3 ; j++){
+                for(int k = 0 ; k < 3 ; k++){
+                    graph.addVertexDirigido(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
+                }
+            }
+        }
+        graph.addVertexDirigido(47,50,ran.nextInt(1,8));
+        graph.addVertexDirigido(48,50,ran.nextInt(1,8));
+        graph.addVertexDirigido(49,50,ran.nextInt(1,8));
     }
     public int getMinimunPath(){
         return minimunPath;
     }
     public void newGraphUndirected(){
-        graph = new GraphList(51);
-        graph.startNewRandomWeightGraphUndirected();
+        graph = new GraphList();
+        graph.addVertex(1,2,ran.nextInt(1,8));
+        graph.addVertex(1,3,ran.nextInt(1,8));
+        graph.addVertex(1,4,ran.nextInt(1,8));
+        for(int i = 0 ; i < 15 ; i++){
+            for(int j = 0 ; j < 3 ; j++){
+                for(int k = 0 ; k < 3 ; k++){
+                    graph.addVertex(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
+                }
+            }
+        }
+        //Last
+        graph.addVertex(47,50,ran.nextInt(1,8));
+        graph.addVertex(48,50,ran.nextInt(1,8));
+        graph.addVertex(49,50,ran.nextInt(1,8));
     }
     public void graphDijkstra(){
         minimunPath = graph.dijkstra(1,50);

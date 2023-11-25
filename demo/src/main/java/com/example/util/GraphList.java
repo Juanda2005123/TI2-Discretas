@@ -90,7 +90,7 @@ public class GraphList<T> {
     public void addVertexDirigido(T vertex1, T vertex2, int weight){
         Vertex<T> vertexFirst = new Vertex<>(vertex1);
         list.add(vertexFirst);
-        Vertex<T> vertexSecond = new Vertex<>(vertex1,weight);
+        Vertex<T> vertexSecond = new Vertex<>(vertex2,weight);
         list.get(list.size()-1).getConnections().add(vertexSecond);
         amountV++;
     }
@@ -277,40 +277,7 @@ public class GraphList<T> {
 
 
     }
-    public void startNewRandomWeightGraphDirected(){
-        //First
-        addVertexDirigido(1,2,ran.nextInt(1,8));
-        addVertexDirigido(1,3,ran.nextInt(1,8));
-        addVertexDirigido(1,4,ran.nextInt(1,8));
-        for(int i = 0 ; i < 15 ; i++){
-            for(int j = 0 ; j < 3 ; j++){
-                for(int k = 0 ; k < 3 ; k++){
-                    addVertexDirigido(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
-                }
-            }
-        }
-        //Last
-        addVertexDirigido(47,50,ran.nextInt(1,8));
-        addVertexDirigido(48,50,ran.nextInt(1,8));
-        addVertexDirigido(49,50,ran.nextInt(1,8));
-    }
-    public void startNewRandomWeightGraphUndirected(){
-        //First
-        addVertex(1,2,ran.nextInt(1,8));
-        addVertex(1,3,ran.nextInt(1,8));
-        addVertex(1,4,ran.nextInt(1,8));
-        for(int i = 0 ; i < 15 ; i++){
-            for(int j = 0 ; j < 3 ; j++){
-                for(int k = 0 ; k < 3 ; k++){
-                    addVertex(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
-                }
-            }
-        }
-        //Last
-        addVertex(47,50,ran.nextInt(1,8));
-        addVertex(48,50,ran.nextInt(1,8));
-        addVertex(49,50,ran.nextInt(1,8));
-    }
+
 
     public static void main(String[] args) {
         int amountV = 51; // Número de vértices
