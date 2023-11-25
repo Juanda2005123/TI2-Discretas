@@ -34,6 +34,73 @@ class GraphListTest {
     }
 
     @Test
+    void fillMatrix(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
+        graph.addVertex(3,4,1);
+        graph.fillMatrix();
+        assertEquals(Integer.MAX_VALUE, graph.getMatrix()[1][3]);
+    }
+
+    @Test
+    void fillMatrix2(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
+        graph.addVertex(3,4,1);
+        graph.fillMatrix();
+        assertEquals(0, graph.getMatrix()[1][1]);
+    }
+
+    @Test
+    void fillMatrix3(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
+        graph.addVertex(3,4,1);
+        graph.fillMatrix();
+        assertEquals(1, graph.getMatrix()[4][3]);
+    }
+
+    @Test
+    void addVertexDirigido(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertexDirigido(1,2,3);
+        graph.addVertexDirigido(2,3,4);
+        graph.addVertexDirigido(3,4,5);
+        graph.addVertexDirigido(4,5,6);
+        graph.addVertexDirigido(5,6,7);
+
+        assertEquals(-1,graph.dijkstra(6,1));
+
+    }
+
+    @Test
+    void addVertexDirigido2(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertexDirigido(1,2,3);
+        graph.addVertexDirigido(2,3,4);
+        graph.addVertexDirigido(3,4,5);
+        graph.addVertexDirigido(4,5,6);
+        graph.addVertexDirigido(5,6,7);
+        assertFalse(graph.checkConnect(2,1));
+    }
+
+
+
+    @Test
+    void addVertexDirigido3(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertexDirigido(1,2,3);
+        graph.addVertexDirigido(2,3,4);
+        graph.addVertexDirigido(3,4,5);
+        graph.addVertexDirigido(4,5,6);
+        graph.addVertexDirigido(5,6,7);
+        assertTrue(graph.checkConnect(1,2));
+    }
+
+    @Test
     void deleteVertex(){
         GraphList<Integer> graph = new GraphList<>();
         graph.addVertex(1,2,3);
@@ -46,7 +113,15 @@ class GraphListTest {
 
     @Test
     void deleteVertex2(){
-
+        GraphList<String> graph = new GraphList<>();
+        graph.addVertex("MaloH", "Agua", 11);
+        graph.addVertex("Agua", "No puede ser", 12);
+        graph.addVertex("Locura", "Descontrol", 2);
+        graph.addVertex("No puede ser", "Locura", 13);
+        graph.addVertex("Locura", "MaloH", 10);
+        graph.addVertex("Agua", "Descontrol", 15);
+        graph.deleteVertex("MaloH");
+        assertFalse(graph.checkConnect("MaloH", "Agua"));
     }
 
 
@@ -57,7 +132,38 @@ class GraphListTest {
         graph.addVertex(2, 3, 4);
         graph.deleteVertex(2);
         assertEquals(-1, graph.dijkstra(1, 3));
-        //assertNull(graph.getList().get(2).get(0));
+    }
+
+    @Test
+    void deleteEdge(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1, 2, 3);
+        graph.addVertex(2, 3, 4);
+        graph.addVertex(3,4,5);
+        graph.deleteEdge(2, 3);
+        assertEquals(1,graph.getList().get(0).getVertex());
+    }
+
+    @Test
+    void deleteEdge2(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1, 2, 3);
+        graph.addVertex(2, 3, 4);
+        graph.addVertex(3,4,5);
+        graph.deleteEdge(2, 3);
+        assertFalse(graph.checkConnect(2,3));
+    }
+
+    @Test
+    void deleteEdge3(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1, 2, 3);
+        graph.addVertex(2, 3, 4);
+        graph.addVertex(3,4,5);
+        graph.deleteEdge(3, 4);
+        graph.deleteEdge(4,3);
+        assertFalse(graph.checkConnect(3,4));
+
     }
 
 
@@ -67,6 +173,27 @@ class GraphListTest {
         graph.addVertex(1,2,3);
         graph.addVertex(2,3,4);
         assertEquals(4, graph.getEdgeWeight(2, 3));
+    }
+
+    @Test
+    void getEdgeWeight2(){
+        GraphList<Character> graph = new GraphList<>();
+        graph.addVertex('A', 'B', 5);
+        graph.addVertex('A', 'C', 10);
+        graph.addVertex('B', 'C', 3);
+        assertEquals(3, graph.getEdgeWeight('B','C'));
+    }
+
+    @Test
+    void getEdgeWeight3(){
+        GraphList<String> graph = new GraphList<>();
+        graph.addVertex("MaloH", "Agua", 12);
+        graph.addVertex("Agua", "No puede ser", 12);
+        graph.addVertex("Locura", "Descontrol", 12);
+        graph.addVertex("No puede ser", "Locura", 12);
+        graph.addVertex("Locura", "MaloH", 10);
+        graph.addVertex("Agua", "Descontrol", 12);
+        assertNotEquals(12, graph.getEdgeWeight("Locura","MaloH"));
     }
 
     @Test
@@ -92,27 +219,6 @@ class GraphListTest {
         graph.addVertex('A', 'C', 10);
         graph.addVertex('B', 'C', 3);
         assertFalse(graph.checkConnect('A', 'E'));
-    }
-
-
-
-
-    @Test
-    void test1(){
-
-    }
-    @Test
-    void test2(){
-        Horse horse = new Horse("Spirit","Red1");
-        horse.newGraphUndirected();
-        horse.graphDijkstra();
-        int num1 = horse.getMinimunPath();
-        horse.graphfloydWarshall();
-        int num2 = horse.getMinimunPath();
-        System.out.println(num1);
-        System.out.println(num2);
-        assertEquals(num1,num2);
-
     }
 
     @Test
@@ -143,6 +249,55 @@ class GraphListTest {
         graph.addVertex('B', 'C', 4);
         int distance = graph.dijkstra('A', 'C');
         assertEquals(-1, distance);
+    }
+
+    @Test
+    public void floydWarshall(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1, 2, 7);
+        graph.addVertex(3, 4, 10);
+        graph.addVertex(6, 5, 4);
+        graph.fillMatrix();
+        graph.floydWarshall();
+        assertEquals(Integer.MAX_VALUE, graph.getMatrix()[0][4]);
+    }
+
+    @Test
+    public void floydWarshall2(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1, 2, 7);
+        graph.addVertex(2,3,5);
+        graph.addVertex(3, 4, 10);
+        graph.addVertex(6, 5, 4);
+        graph.fillMatrix();
+        graph.floydWarshall();
+
+
+            for (int i = 0; i < graph.getMatrix().length; i++) {
+                for (int j = 0; j < graph.getMatrix()[i].length; j++) {
+                    if(graph.getMatrix()[i][j] == Integer.MAX_VALUE){
+                        System.out.print(" I " + "| ");
+                    }else{
+                        System.out.print(graph.getMatrix()[i][j] + "| ");
+                    }
+
+                }
+                System.out.println();
+            }
+
+
+        assertEquals(22, graph.getMatrix()[4][0]);
+    }
+
+    public void floydWarshall3(){
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addVertex(1, 2, 7);
+        graph.addVertex(2,3,5);
+        graph.addVertex(3, 4, 10);
+        graph.addVertex(6, 5, 4);
+        graph.fillMatrix();
+        graph.floydWarshall();
+        assertEquals(0,graph.getMatrix()[2][2]);
     }
 
 }
