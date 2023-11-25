@@ -98,38 +98,6 @@ public class GraphList<T> {
         list.get(list.size()-1).getConnections().add(vertexSecond);
         amountV++;
     }
-
-    public String printMatrix(){
-        String ans = "";
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix.length; j++){
-                if (matrix[i][j] == Integer.MAX_VALUE){
-                    ans += " | I | ";
-                }else{
-                    ans += " | " + matrix[i][j] + " | ";
-                }
-
-            }
-            ans += "\n";
-        }
-        return ans;
-    }
-
-    public void printGraph(){
-
-        for(int i = 0; i < amountV; i++){
-
-            System.out.println("Vertex " + list.get(i).getVertex() + ": ");
-            for(int j = 0; j < list.get(i).getConnections().size(); j++){
-                int adjacent = (Integer)list.get(i).getConnections().get(j).getVertex();
-                int weight = list.get(i).getConnections().get(j).getWeight();
-
-                System.out.println(adjacent + " (" + weight + ") ");
-            }
-            System.out.println();
-        }
-    }
-
     public void deleteVertex(T vertex){
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).getVertex().equals(vertex)){
