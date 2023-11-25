@@ -3,14 +3,12 @@ import org.controlsfx.control.spreadsheet.SpreadsheetCellType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GraphList<T> {
     private int amountV;
-    private List<Vertex<T>> list;
+    private final List<Vertex<T>> list;
 
     private Integer[][] matrix;
-    private Random ran;
 
     public Integer[][] getMatrix() {
         return matrix;
@@ -23,20 +21,9 @@ public class GraphList<T> {
     public List<Vertex<T>> getList() {
         return list;
     }
-/**
-    public GraphList(int amountV) {
-        ran = new Random();
-        this.amountV = amountV;
-        list = new ArrayList<>(amountV+1);
-        for (int i = 1; i < amountV+1; i++) {
-            list.add(new ArrayList<>(2));
-        }
-        matrix = new Integer[amountV][amountV];
-    }
- */
+
     public GraphList(){
         this.amountV = 0;
-        ran = new Random();
         list = new ArrayList<Vertex<T>>();
 
     }
@@ -46,7 +33,7 @@ public class GraphList<T> {
         for (int i = 0; i < list.size(); i++){
             for (int j = 0; j < list.get(i).getConnections().size(); j++){
                 int temp = (Integer)list.get(i).getConnections().get(j).getVertex();
-                matrix[i][temp] = list.get(i).getConnections().get(j).getWeight();
+                matrix[i][temp-1] = list.get(i).getConnections().get(j).getWeight();
             }
         }
 
@@ -62,15 +49,18 @@ public class GraphList<T> {
     }
 
     public void floydWarshall() {
-        for (int k = 0; k < amountV; k++) {
-            for (int i = 0; i < amountV; i++) {
-                for (int j = 0; j < amountV; j++) {
-                    if (matrix[i][k] != Integer.MAX_VALUE && matrix[k][j] != Integer.MAX_VALUE) {
-                        matrix[i][j] = Math.min(matrix[i][j], matrix[i][k] + matrix[k][j]);
+        for(int h = 0; h < 10; h++){
+            for (int k = 0; k < amountV; k++) {
+                for (int i = 0; i < amountV; i++) {
+                    for (int j = 0; j < amountV; j++) {
+                        if (matrix[i][k] != Integer.MAX_VALUE && matrix[k][j] != Integer.MAX_VALUE) {
+                            matrix[i][j] = Math.min(matrix[i][j], matrix[i][k] + matrix[k][j]);
+                        }
                     }
                 }
             }
         }
+
     }
 
 
@@ -98,38 +88,6 @@ public class GraphList<T> {
         list.get(list.size()-1).getConnections().add(vertexSecond);
         amountV++;
     }
-
-    public String printMatrix(){
-        String ans = "";
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix.length; j++){
-                if (matrix[i][j] == Integer.MAX_VALUE){
-                    ans += " | I | ";
-                }else{
-                    ans += " | " + matrix[i][j] + " | ";
-                }
-
-            }
-            ans += "\n";
-        }
-        return ans;
-    }
-
-    public void printGraph(){
-
-        for(int i = 0; i < amountV; i++){
-
-            System.out.println("Vertex " + list.get(i).getVertex() + ": ");
-            for(int j = 0; j < list.get(i).getConnections().size(); j++){
-                int adjacent = (Integer)list.get(i).getConnections().get(j).getVertex();
-                int weight = list.get(i).getConnections().get(j).getWeight();
-
-                System.out.println(adjacent + " (" + weight + ") ");
-            }
-            System.out.println();
-        }
-    }
-
     public void deleteVertex(T vertex){
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).getVertex().equals(vertex)){
@@ -144,22 +102,7 @@ public class GraphList<T> {
             }
         }
     }
- /**
-    public void deleteEdge(int edge1, int edge2){
-        for (int i = 0; i < list.get(edge1).size(); i+=2){
-            if(list.get(edge1).get(i) == edge2){
-                list.get(edge1).remove(i+1);
-                list.get(edge1).remove(i);
-            }
-        }
-        for (int i = 0; i < list.get(edge2).size(); i+=2){
-            if(list.get(edge2).get(i) == edge1) {
-                list.get(edge2).remove(i + 1);
-                list.get(edge2).remove(i);
-            }
-        }
-    }
-*/
+
     public void deleteEdge(T vertex1, T vertex2){
         for(int i = 0; i < list.size(); i++){
 
@@ -173,7 +116,6 @@ public class GraphList<T> {
                     }
                 }
 
-                break;
 
             }
         }
@@ -189,9 +131,6 @@ public class GraphList<T> {
                         break;
                     }
                 }
-
-                break;
-
             }
         }
     }
@@ -225,19 +164,7 @@ public class GraphList<T> {
 
         return false;
     }
-/**
-    public String getListVertex(int edge){
-        String ans = "";
 
-        for (int i = 0; i < list.get(edge).size(); i+=2){
-            int adjacent = list.get(edge).get(i);
-            int weight = list.get(edge).get(i + 1);
-            ans = (adjacent + "(" + weight + ") ");
-        }
-
-        return ans;
-    }
-*/
     public int dijkstra(T start, T destination) {
 
         int[] distances = new int[amountV];
@@ -263,8 +190,7 @@ public class GraphList<T> {
             T actual = nextToVisit.get(i).getFirst();
             int acumDistance = nextToVisit.get(i).getSecond();
 
-            if (actual.equals(destination)) {
-                //return acumDistance;
+            if (actual.equals(destination)){
                 possibleRoads.add(acumDistance);
             }
 
@@ -300,8 +226,6 @@ public class GraphList<T> {
             return min;
 
         }
-
-
     }
 }
 
