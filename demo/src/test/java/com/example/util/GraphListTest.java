@@ -1,7 +1,6 @@
 package com.example.util;
 
 import com.example.model.Horse;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,8 +9,8 @@ class GraphListTest {
 
     @Test
     void addEdge() {GraphList graph = new GraphList(4);
-        graph.addEdge(1,2,3);
-        graph.addEdge(2,3,4);
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
         assertEquals(2, graph.getList().get(1).get(0));
         assertNotEquals(4, graph.getList().get(2).get(0));
     }
@@ -19,8 +18,8 @@ class GraphListTest {
     @Test
     void deleteVertex(){
         GraphList graph = new GraphList(4);
-        graph.addEdge(1,2,3);
-        graph.addEdge(2,3,4);
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
         graph.deleteVertex(1);
         assertNull(graph.getList().get(1));
     }
@@ -30,8 +29,8 @@ class GraphListTest {
     @Test
     void deleteEdge(){
         GraphList graph = new GraphList(4);
-        graph.addEdge(1,2,3);
-        graph.addEdge(2,3,4);
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
         graph.deleteEdge(2,3);
         assertNull(graph.getList().get(2).get(0));
     }
@@ -41,16 +40,16 @@ class GraphListTest {
     @Test
     void getEdgeWeight(){
         GraphList graph = new GraphList(4);
-        graph.addEdge(1,2,3);
-        graph.addEdge(2,3,4);
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
         assertEquals(4, graph.getEdgeWeight(2, 3));
     }
 
     @Test
     void checkConnect(){
         GraphList graph = new GraphList(4);
-        graph.addEdge(1,2,3);
-        graph.addEdge(2,3,4);
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
 
         assertTrue(graph.checkConnect(1,2));
         assertFalse(graph.checkConnect(1,3));
@@ -59,8 +58,8 @@ class GraphListTest {
     @Test
     void getListVertex(){
         GraphList graph = new GraphList(4);
-        graph.addEdge(1,2,3);
-        graph.addEdge(2,3,4);
+        graph.addVertex(1,2,3);
+        graph.addVertex(2,3,4);
 
         assertTrue(graph.getListVertex(1).equals("2(3) "));
     }

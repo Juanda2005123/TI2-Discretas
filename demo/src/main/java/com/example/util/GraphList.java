@@ -3,9 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GraphList {
+public class GraphList<T> {
     private int amountV;
-    private List<List<Integer>> list;
+    private List<Vertex<T>> list;
+
     private Integer[][] matrix;
     private Random ran;
 
@@ -17,10 +18,10 @@ public class GraphList {
         return amountV;
     }
 
-    public List<List<Integer>> getList() {
+    public List<Vertex<T>> getList() {
         return list;
     }
-
+/**
     public GraphList(int amountV) {
         ran = new Random();
         this.amountV = amountV;
@@ -30,12 +31,18 @@ public class GraphList {
         }
         matrix = new Integer[amountV][amountV];
     }
+ */
+    public GraphList(){
+        this.amountV = 0;
+        ran = new Random();
+        list = new ArrayList<Vertex<T>>();
+    }
 
     public void fillMatrix(){
-
-        for (int i = 1; i < list.size(); i++){
-            for (int j = 0; j < list.get(i).size(); j+=2){
-                matrix[i-1][list.get(i).get(j)-1] = list.get(i).get(j+1);
+        for (int i = 0; i < list.size(); i++){
+            for (int j = 0; j < list.get(i).getConnections().size(); j++){
+                int temp = (Integer)list.get(i).getConnections().get(j).getVertex();
+                matrix[i][temp] = list.get(i).getConnections().get(j).getWeight();
             }
         }
 
@@ -62,16 +69,27 @@ public class GraphList {
         }
     }
 
-    public void addEdge(int edge1, int edge2, int weight) {
-        list.get(edge1).add(0,edge2);
-        list.get(edge1).add(1,weight);
-        list.get(edge2).add(0, edge1);
-        list.get(edge2).add(1, weight);
+
+
+    public void addVertex(T vertex1, T vertex2, int weight){
+
+        Vertex<T> vertexFirst = new Vertex<>(vertex1);
+        list.add(vertexFirst);
+        Vertex<T> vertexSecond = new Vertex<>(vertex2,weight);
+        list.get(list.size()-1).getConnections().add(vertexSecond);
+
+        Vertex<T> vertexFirst2 = new Vertex<>(vertex2);
+        list.add(vertexFirst2);
+        Vertex<T> vertexSecond2 = new Vertex<>(vertex1, weight);
+        list.get(list.size()-1).getConnections().add(vertexSecond2);
 
     }
-    public void addEdgeDirigido(int edge1, int edge2, int weight){
-        list.get(edge1).add(0,edge2);
-        list.get(edge1).add(1,weight);
+
+    public void addVertexDirigido(T vertex1, T vertex2, int weight){
+        Vertex<T> vertexFirst = new Vertex<>(vertex1);
+        list.add(vertexFirst);
+        Vertex<T> vertexSecond = new Vertex<>(vertex1,weight);
+        list.get(list.size()-1).getConnections().add(vertexSecond);
     }
 
     public String printMatrix(){
@@ -90,68 +108,57 @@ public class GraphList {
         return ans;
     }
 
-    public void printGraph() {
-        for (int i = 1;  i < amountV; i++) {
-            System.out.print("Vertex " + i + ": ");
+    public void printGraph(){
 
-            for (int j = 0; j < list.get(i).size(); j += 2) {
+        for(int i = 0; i < amountV; i++){
 
-                int adjacent = list.get(i).get(j);
-                int weight = list.get(i).get(j + 1);
-                System.out.print(adjacent + "(" + weight + ") ");
+            System.out.println("Vertex " + list.get(i).getVertex() + ": ");
+            for(int j = 0; j < list.get(i).getConnections().size(); j++){
+                int adjacent = (Integer)list.get(i).getConnections().get(j).getVertex();
+                int weight = list.get(i).getConnections().get(j).getWeight();
+
+                System.out.println(adjacent + " (" + weight + ") ");
             }
             System.out.println();
         }
     }
-    public void deleteVertex(int vertex){
-        for(int i = 1; i < amountV; i++){
-            if(i == vertex){
 
-                list.remove(vertex);
-
-                list.add(vertex, new ArrayList<>());
-
+    public void deleteVertex(T vertex){
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getVertex().equals(vertex)){
+                list.remove(i);
             }else{
-
-                for(int j = 0; j < (list.get(i)).size(); j+=2){
-
-                    if(list.get(i).get(j) == vertex){
-                        list.get(i).remove(j+1);
-                        list.get(i).remove(j);
-
+                for(int j = 0; j < list.get(i).getConnections().size(); j++){
+                    if(list.get(i).getConnections().get(j).getVertex().equals(vertex)){
+                        list.get(i).getConnections().remove(j);
                     }
                 }
             }
-
         }
     }
 
     public void deleteEdge(int edge1, int edge2){
         for (int i = 0; i < list.get(edge1).size(); i+=2){
-
             if(list.get(edge1).get(i) == edge2){
-
                 list.get(edge1).remove(i+1);
                 list.get(edge1).remove(i);
-
             }
-
         }
-
         for (int i = 0; i < list.get(edge2).size(); i+=2){
-
-            if(list.get(edge2).get(i) == edge1){
-
-                list.get(edge2).remove(i+1);
+            if(list.get(edge2).get(i) == edge1) {
+                list.get(edge2).remove(i + 1);
                 list.get(edge2).remove(i);
-
             }
-
         }
-
-
     }
 
+    public void deleteEdge(T edge1, T edge2){
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getVertex().equals(edge1)){
+                
+            }
+        }
+    }
     public int getEdgeWeight(int edge1, int edge2){
         int ans = -1;
         for(int i = 0; i < list.get(edge1).size(); i+=2){
@@ -255,20 +262,20 @@ public class GraphList {
     }
     public void startNewRandomWeightGraphUndirected(){
         //First
-        addEdge(1,2,ran.nextInt(1,8));
-        addEdge(1,3,ran.nextInt(1,8));
-        addEdge(1,4,ran.nextInt(1,8));
+        addVertex(1,2,ran.nextInt(1,8));
+        addVertex(1,3,ran.nextInt(1,8));
+        addVertex(1,4,ran.nextInt(1,8));
         for(int i = 0 ; i < 15 ; i++){
             for(int j = 0 ; j < 3 ; j++){
                 for(int k = 0 ; k < 3 ; k++){
-                    addEdge(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
+                    addVertex(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
                 }
             }
         }
         //Last
-        addEdge(47,50,ran.nextInt(1,8));
-        addEdge(48,50,ran.nextInt(1,8));
-        addEdge(49,50,ran.nextInt(1,8));
+        addVertex(47,50,ran.nextInt(1,8));
+        addVertex(48,50,ran.nextInt(1,8));
+        addVertex(49,50,ran.nextInt(1,8));
     }
 
     public static void main(String[] args) {
@@ -278,17 +285,17 @@ public class GraphList {
         //Horizontal
 
         //Fila uno
-        graph.addEdge(1, 2, graph.ran.nextInt(1,6));
-        graph.addEdge(2, 3, graph.ran.nextInt(1,6));
-        graph.addEdge(3, 4, graph.ran.nextInt(1,6));
-        graph.addEdge(4, 5, graph.ran.nextInt(1,6));
-        graph.addEdge(5, 6, graph.ran.nextInt(1,6));
-        graph.addEdge(6, 7, graph.ran.nextInt(1,6));
-        graph.addEdge(7, 8, graph.ran.nextInt(1,6));
-        graph.addEdge(8, 9, graph.ran.nextInt(1,6));
-        graph.addEdge(9, 10, graph.ran.nextInt(1,6));
+        graph.addVertex(1, 2, graph.ran.nextInt(1,6));
+        graph.addVertex(2, 3, graph.ran.nextInt(1,6));
+        graph.addVertex(3, 4, graph.ran.nextInt(1,6));
+        graph.addVertex(4, 5, graph.ran.nextInt(1,6));
+        graph.addVertex(5, 6, graph.ran.nextInt(1,6));
+        graph.addVertex(6, 7, graph.ran.nextInt(1,6));
+        graph.addVertex(7, 8, graph.ran.nextInt(1,6));
+        graph.addVertex(8, 9, graph.ran.nextInt(1,6));
+        graph.addVertex(9, 10, graph.ran.nextInt(1,6));
 
-        //graph.printGraph();
+        graph.printGraph();
         //graph.getListVertex(1);
 
         System.out.println(graph.dijkstra(1, 2));
