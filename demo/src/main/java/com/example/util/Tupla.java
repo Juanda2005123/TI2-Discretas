@@ -1,20 +1,20 @@
 package com.example.util;
 
 
-public class Tupla {
-    private int first;
+public class Tupla<T> {
+    private T first;
     private int second;
 
-    public Tupla(int first, int second){
+    public Tupla(T first, int second){
         this.first = first;
         this.second = second;
     }
 
-    public int getFirst() {
+    public T getFirst() {
         return first;
     }
 
-    public void setFirst(int first) {
+    public void setFirst(T first) {
         this.first = first;
     }
 

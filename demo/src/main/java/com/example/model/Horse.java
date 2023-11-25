@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Horse {
+public class Horse{
     private String name;
     private int wins;
     private double winningPercentage;
@@ -29,7 +29,7 @@ public class Horse {
     private int frameImg;
     private final int horseWidth;
     private final int horseHeight;
-    private GraphList graph;
+    private GraphList<Integer> graph;
     private int minimunPath;
     private ArrayList<Double> animationSpeed;
     private ArrayList<Integer> countSpeed;
@@ -63,7 +63,7 @@ public class Horse {
         }
     }
     public void newGraphDirected(){
-        graph = new GraphList();
+        graph = new GraphList<>();
         graph.addVertexDirigido(1,2,ran.nextInt(1,8));
         graph. addVertexDirigido(1,3,ran.nextInt(1,8));
         graph.addVertexDirigido(1,4,ran.nextInt(1,8));
@@ -77,12 +77,13 @@ public class Horse {
         graph.addVertexDirigido(47,50,ran.nextInt(1,8));
         graph.addVertexDirigido(48,50,ran.nextInt(1,8));
         graph.addVertexDirigido(49,50,ran.nextInt(1,8));
+        graph.fillMatrix();
     }
     public int getMinimunPath(){
         return minimunPath;
     }
     public void newGraphUndirected(){
-        graph = new GraphList();
+        graph = new GraphList<>();
         graph.addVertex(1,2,ran.nextInt(1,8));
         graph.addVertex(1,3,ran.nextInt(1,8));
         graph.addVertex(1,4,ran.nextInt(1,8));
@@ -97,6 +98,7 @@ public class Horse {
         graph.addVertex(47,50,ran.nextInt(1,8));
         graph.addVertex(48,50,ran.nextInt(1,8));
         graph.addVertex(49,50,ran.nextInt(1,8));
+        graph.fillMatrix();
     }
     public void graphDijkstra(){
         minimunPath = graph.dijkstra(1,50);

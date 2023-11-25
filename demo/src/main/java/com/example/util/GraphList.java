@@ -1,4 +1,6 @@
 package com.example.util;
+import org.controlsfx.control.spreadsheet.SpreadsheetCellType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -36,9 +38,11 @@ public class GraphList<T> {
         this.amountV = 0;
         ran = new Random();
         list = new ArrayList<Vertex<T>>();
+
     }
 
     public void fillMatrix(){
+        this.matrix = new Integer[amountV][amountV];
         for (int i = 0; i < list.size(); i++){
             for (int j = 0; j < list.get(i).getConnections().size(); j++){
                 int temp = (Integer)list.get(i).getConnections().get(j).getVertex();
@@ -134,6 +138,7 @@ public class GraphList<T> {
                 for(int j = 0; j < list.get(i).getConnections().size(); j++){
                     if(list.get(i).getConnections().get(j).getVertex().equals(vertex)){
                         list.get(i).getConnections().remove(j);
+
                     }
                 }
             }
@@ -164,8 +169,11 @@ public class GraphList<T> {
 
                     if(list.get(i).getConnections().get(j).getVertex().equals(vertex2)){
                         list.get(i).getConnections().remove(j);
+                        break;
                     }
                 }
+
+                break;
 
             }
         }
@@ -178,8 +186,11 @@ public class GraphList<T> {
 
                     if(list.get(i).getConnections().get(j).getVertex().equals(vertex1)){
                         list.get(i).getConnections().remove(j);
+                        break;
                     }
                 }
+
+                break;
 
             }
         }
@@ -214,7 +225,7 @@ public class GraphList<T> {
 
         return false;
     }
-
+/**
     public String getListVertex(int edge){
         String ans = "";
 
@@ -226,38 +237,53 @@ public class GraphList<T> {
 
         return ans;
     }
+*/
+    public int dijkstra(T start, T destination) {
 
-    public int dijkstra(int start, int destination) {
-
-        int[] distances = new int[amountV + 1];
-        for (int i = 1; i <= amountV; i++) {
+        int[] distances = new int[amountV];
+        for (int i = 0; i < amountV; i++) {
             distances[i] = Integer.MAX_VALUE;
         }
-        distances[start] = 0;
 
-        ArrayList<Tupla> nextToVisit = new ArrayList<>();
-        Tupla tupla = new Tupla(start, 0);
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getVertex().equals(start)){
+                distances[i] = 0;
+                break;
+            }
+        }
+
+
+        ArrayList<Tupla<T>> nextToVisit = new ArrayList<>();
+        Tupla<T> tupla = new Tupla<>(start, 0);
         nextToVisit.add(tupla);
         ArrayList<Integer> possibleRoads = new ArrayList<>();
 
         for (int i = 0; i < nextToVisit.size(); i++) {
 
-            int actual = nextToVisit.get(i).getFirst();
+            T actual = nextToVisit.get(i).getFirst();
             int acumDistance = nextToVisit.get(i).getSecond();
 
-            if (actual == destination) {
+            if (actual.equals(destination)) {
                 //return acumDistance;
                 possibleRoads.add(acumDistance);
             }
 
-            for (int j = 0; j < list.get(actual).size(); j += 2) {
-                int neighbor = list.get(actual).get(j);
-                int weight = list.get(actual).get(j + 1);
-                int newDistance = acumDistance + weight;
+            for(int j = 0; j < list.size(); j++){
+                if(list.get(j).getVertex().equals(actual)){
+                    for(int k = 0; k < list.get(j).getConnections().size();k++){
+                        T neighbor = list.get(j).getConnections().get(k).getVertex();
+                        int weight = list.get(j).getConnections().get(k).getWeight();
+                        int newDistance = acumDistance + weight;
 
-                if (newDistance < distances[neighbor]) {
-                    distances[neighbor] = newDistance;
-                    nextToVisit.add(new Tupla(neighbor, newDistance));
+                        for(int h = 0; h < list.size(); h++){
+                            if(list.get(h).getVertex().equals(neighbor)){
+                                if(newDistance < distances[h]){
+                                    distances[h] = newDistance;
+                                    nextToVisit.add(new Tupla<>(neighbor, newDistance));
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -276,35 +302,6 @@ public class GraphList<T> {
         }
 
 
-    }
-
-
-    public static void main(String[] args) {
-        int amountV = 51; // Número de vértices
-        GraphList graph = new GraphList(amountV);
-
-        //Horizontal
-
-        //Fila uno
-        graph.addVertex(1, 2, graph.ran.nextInt(1,6));
-        graph.addVertex(2, 3, graph.ran.nextInt(1,6));
-        graph.addVertex(3, 4, graph.ran.nextInt(1,6));
-        graph.addVertex(4, 5, graph.ran.nextInt(1,6));
-        graph.addVertex(5, 6, graph.ran.nextInt(1,6));
-        graph.addVertex(6, 7, graph.ran.nextInt(1,6));
-        graph.addVertex(7, 8, graph.ran.nextInt(1,6));
-        graph.addVertex(8, 9, graph.ran.nextInt(1,6));
-        graph.addVertex(9, 10, graph.ran.nextInt(1,6));
-
-        graph.printGraph();
-        //graph.getListVertex(1);
-
-        System.out.println(graph.dijkstra(1, 2));
-
-        graph.fillMatrix();
-        //System.out.println(graph.printMatrix());
-        graph.floydWarshall();
-        System.out.println(graph.matrix[0][1]);
     }
 }
 
