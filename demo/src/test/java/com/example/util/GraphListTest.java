@@ -289,6 +289,7 @@ class GraphListTest {
         assertEquals(22, graph.getMatrix()[4][0]);
     }
 
+    @Test
     public void floydWarshall3(){
         GraphList<Integer> graph = new GraphList<>();
         graph.addVertex(1, 2, 7);
