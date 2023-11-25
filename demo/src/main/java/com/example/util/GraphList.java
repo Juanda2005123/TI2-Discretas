@@ -77,11 +77,13 @@ public class GraphList<T> {
         list.add(vertexFirst);
         Vertex<T> vertexSecond = new Vertex<>(vertex2,weight);
         list.get(list.size()-1).getConnections().add(vertexSecond);
+        amountV++;
 
         Vertex<T> vertexFirst2 = new Vertex<>(vertex2);
         list.add(vertexFirst2);
         Vertex<T> vertexSecond2 = new Vertex<>(vertex1, weight);
         list.get(list.size()-1).getConnections().add(vertexSecond2);
+        amountV++;
 
     }
 
@@ -90,6 +92,7 @@ public class GraphList<T> {
         list.add(vertexFirst);
         Vertex<T> vertexSecond = new Vertex<>(vertex1,weight);
         list.get(list.size()-1).getConnections().add(vertexSecond);
+        amountV++;
     }
 
     public String printMatrix(){
@@ -136,7 +139,7 @@ public class GraphList<T> {
             }
         }
     }
-
+ /**
     public void deleteEdge(int edge1, int edge2){
         for (int i = 0; i < list.get(edge1).size(); i+=2){
             if(list.get(edge1).get(i) == edge2){
@@ -151,34 +154,65 @@ public class GraphList<T> {
             }
         }
     }
-
-    public void deleteEdge(T edge1, T edge2){
+*/
+    public void deleteEdge(T vertex1, T vertex2){
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getVertex().equals(edge1)){
-                
+
+            if(list.get(i).getVertex().equals(vertex1)){
+
+                for(int j = 0; j < list.get(i).getConnections().size(); j++){
+
+                    if(list.get(i).getConnections().get(j).getVertex().equals(vertex2)){
+                        list.get(i).getConnections().remove(j);
+                    }
+                }
+
+            }
+        }
+
+        for(int i = 0; i < list.size(); i++){
+
+            if(list.get(i).getVertex().equals(vertex2)){
+
+                for(int j = 0; j < list.get(i).getConnections().size(); j++){
+
+                    if(list.get(i).getConnections().get(j).getVertex().equals(vertex1)){
+                        list.get(i).getConnections().remove(j);
+                    }
+                }
+
             }
         }
     }
-    public int getEdgeWeight(int edge1, int edge2){
+
+    public int getEdgeWeight(T vertex1, T vertex2){
         int ans = -1;
-        for(int i = 0; i < list.get(edge1).size(); i+=2){
-            if(list.get(edge1).get(i) == edge2){
-                ans = list.get(edge1).get(i+1);
+
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getVertex().equals(vertex1)){
+                for(int j = 0; j < list.get(i).getConnections().size(); j++){
+                    if(list.get(i).getConnections().get(j).getVertex().equals(vertex2)){
+                        return list.get(i).getConnections().get(j).getWeight();
+                    }
+                }
             }
         }
+
         return ans;
     }
+    public boolean checkConnect(T vertex1, T vertex2){
 
-    public boolean checkConnect(int edge1, int edge2){
-        boolean ans = false;
-
-        for(int i = 0; i < list.get(edge1).size(); i+=2){
-            if(list.get(edge1).get(i) == edge2){
-                ans = true;
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getVertex().equals(vertex1)){
+                for(int j = 0; j < list.get(i).getConnections().size(); j++){
+                    if(list.get(i).getConnections().get(j).getVertex().equals(vertex2)){
+                        return true;
+                    }
+                }
             }
         }
 
-        return ans;
+        return false;
     }
 
     public String getListVertex(int edge){
@@ -245,20 +279,20 @@ public class GraphList<T> {
     }
     public void startNewRandomWeightGraphDirected(){
         //First
-        addEdgeDirigido(1,2,ran.nextInt(1,8));
-        addEdgeDirigido(1,3,ran.nextInt(1,8));
-        addEdgeDirigido(1,4,ran.nextInt(1,8));
+        addVertexDirigido(1,2,ran.nextInt(1,8));
+        addVertexDirigido(1,3,ran.nextInt(1,8));
+        addVertexDirigido(1,4,ran.nextInt(1,8));
         for(int i = 0 ; i < 15 ; i++){
             for(int j = 0 ; j < 3 ; j++){
                 for(int k = 0 ; k < 3 ; k++){
-                    addEdgeDirigido(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
+                    addVertexDirigido(2+(i*3)+j,5+(i*3)+k,ran.nextInt(1,8));
                 }
             }
         }
         //Last
-        addEdgeDirigido(47,50,ran.nextInt(1,8));
-        addEdgeDirigido(48,50,ran.nextInt(1,8));
-        addEdgeDirigido(49,50,ran.nextInt(1,8));
+        addVertexDirigido(47,50,ran.nextInt(1,8));
+        addVertexDirigido(48,50,ran.nextInt(1,8));
+        addVertexDirigido(49,50,ran.nextInt(1,8));
     }
     public void startNewRandomWeightGraphUndirected(){
         //First
